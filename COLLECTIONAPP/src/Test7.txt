@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 //Creating List for custom/userdefined class
 //practice all methods including stream()
 //pojo class @Bean
@@ -59,10 +63,35 @@ class Employee {
 }
 public class Test7 {
 	public static void main(String[] args) {
-         
+    List<Employee> emplist=new ArrayList<Employee>();
+    emplist.add(new Employee(1,"sachin",50000,"mumbai","batsman"));
+    emplist.add(new Employee(11,"rahul",40000,"bangalore","batsman"));
+    emplist.add(new Employee(21,"sourav",40000,"kolkata","captain"));
+    emplist.add(new Employee(35,"laxman",50000,"andhra pradesh","batsman"));
+    emplist.add(new Employee(69,"zaheer",50000,"hyderabad","bowler"));
+    emplist.add(new Employee(156,"gowtham",50000,"mumbai","batsman"));
+    emplist.add(new Employee(2,"anil",35000,"punjab","bowler"));
+    emplist.add(new Employee(19,"ramesh",34000,"lucknow","allrounder"));
+    emplist.add(new Employee(7,"dhoni",60000,"chennai","batsman"));
+    emplist.add(new Employee(14,"virat",55000,"bangalore","batsman"));
+    //Displaying List as one object
+    System.out.println(emplist);
+    //Displaying the contents of the list individually
+    System.out.println("through for-each loop");
+    for(Employee i:emplist  ) {
+    	System.out.println(i);
+    }
+    System.out.println("through iterator loop");
+    ListIterator<Employee> iterator=emplist.listIterator();
+    while(iterator.hasNext()) {
+    	System.out.println(iterator.next());
 	}
 
 }
+}
+
+
+
 
 
 
