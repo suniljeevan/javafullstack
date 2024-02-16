@@ -1,0 +1,69 @@
+//Creating List for custom/userdefined class
+//practice all methods including stream()
+//pojo class @Bean
+class Employee {
+	private int Id;
+	private String name;
+	private double salary;
+	private String address;
+	private String designation;
+	//add getter setter  use alt shift s
+	public int getId() {
+		return Id;
+	}
+	public void setId(int id) {
+		Id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getDesignation() {
+		return designation;
+	}
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+	//generate both constructor alt shift s
+	public Employee(int id, String name, double salary, String address, String designation) {
+		super();
+		Id = id;
+		this.name = name;
+		this.salary = salary;
+		this.address = address;
+		this.designation = designation;
+	}
+	public Employee() {
+		super();
+	}
+	//generate toString()
+	@Override
+	public String toString() {
+		return "Employee [Id=" + Id + ", name=" + name + ", salary=" + salary + ", address=" + address
+				+ ", designation=" + designation + "]";
+	}
+}
+public class Test7 {
+	public static void main(String[] args) {
+         
+	}
+
+}
+
+
+
+
