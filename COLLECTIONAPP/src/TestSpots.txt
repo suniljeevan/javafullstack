@@ -27,7 +27,7 @@ class PicnicSpot {
         this.hotelAndRestaurantAvailability = hotelAndRestaurantAvailability;
         this.reviews = reviews;
     }
-
+   //add getter and setter
     @Override
     public String toString() {
         return "PicnicSpot{" +
@@ -51,19 +51,18 @@ public class PicnicSpotsAnalyzer {
 
         // Find the best spot as per distance
         PicnicSpot bestSpotByDistance = picnicSpots.stream()
-                .min(Comparator.comparingDouble(PicnicSpot::getDistance))
-                .orElse(null);
+                .min(x,y)->Double.compare(x.getDistance(),y.getDistance());
         System.out.println("Best spot as per distance: " + bestSpotByDistance);
 
         // Find the best spot as per reviews
         PicnicSpot bestSpotByReviews = picnicSpots.stream()
-                .max(Comparator.comparingDouble(PicnicSpot::getReviews))
-                .orElse(null);
+                .max(x,y)->Double.compare(x.getReviews(),y.getReviews());
+                
         System.out.println("Best spot as per reviews: " + bestSpotByReviews);
 
         // Find the best spot as per hotel availability
         PicnicSpot bestSpotByHotelAvailability = picnicSpots.stream()
-                .filter(PicnicSpot::isHotelAndRestaurantAvailability)
+                .filter(x->x.getHotelAndRestuarantAvailabilty())
                 .findFirst()
                 .orElse(null);
         System.out.println("Best spot as per hotel availability: " + bestSpotByHotelAvailability);
