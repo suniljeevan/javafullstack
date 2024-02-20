@@ -17,17 +17,7 @@ class PicnicSpot {
     }
    //add getter and setter
     
-    @Override
-    public String toString() {
-        return "PicnicSpot{" +
-                "name='" + name + '\'' +
-                ", distance=" + distance +
-                ", hotelAndRestaurantAvailability=" + hotelAndRestaurantAvailability +
-                ", reviews=" + reviews +
-                '}';
-    }
-
-	public String getName() {
+   	public String getName() {
 		return name;
 	}
 
@@ -58,6 +48,15 @@ class PicnicSpot {
 	public void setReviews(double reviews) {
 		this.reviews = reviews;
 	}
+ @Override
+    public String toString() {
+        return "PicnicSpot{" +
+                "name='" + name + '\'' +
+                ", distance=" + distance +
+                ", hotelAndRestaurantAvailability=" + hotelAndRestaurantAvailability +
+                ", reviews=" + reviews +
+                '}';
+    }
 }
 
 public class PicnicSpotsAnalyzer {
