@@ -1,15 +1,3 @@
-https://github.com/suniljeevan/javafullstack
-
-
-Group of friends decided for a picnic
-They selected many spots.
-
-find 
-1. the best spot based on distance
-2. the best spot based on availability of facilities
-3. based on reviews.
-use collection list
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -28,6 +16,7 @@ class PicnicSpot {
         this.reviews = reviews;
     }
    //add getter and setter
+    
     @Override
     public String toString() {
         return "PicnicSpot{" +
@@ -37,6 +26,38 @@ class PicnicSpot {
                 ", reviews=" + reviews +
                 '}';
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
+	public boolean isHotelAndRestaurantAvailability() {
+		return hotelAndRestaurantAvailability;
+	}
+
+	public void setHotelAndRestaurantAvailability(boolean hotelAndRestaurantAvailability) {
+		this.hotelAndRestaurantAvailability = hotelAndRestaurantAvailability;
+	}
+
+	public double getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(double reviews) {
+		this.reviews = reviews;
+	}
 }
 
 public class PicnicSpotsAnalyzer {
@@ -51,21 +72,20 @@ public class PicnicSpotsAnalyzer {
 
         // Find the best spot as per distance
         PicnicSpot bestSpotByDistance = picnicSpots.stream()
-                .min(x,y)->Double.compare(x.getDistance(),y.getDistance());
+                .min((x,y)->Double.compare(x.getDistance(),y.getDistance())).get();
         System.out.println("Best spot as per distance: " + bestSpotByDistance);
 
         // Find the best spot as per reviews
         PicnicSpot bestSpotByReviews = picnicSpots.stream()
-                .max(x,y)->Double.compare(x.getReviews(),y.getReviews());
+                .max((x,y)->Double.compare(x.getReviews(),y.getReviews())).get();
                 
         System.out.println("Best spot as per reviews: " + bestSpotByReviews);
 
         // Find the best spot as per hotel availability
         PicnicSpot bestSpotByHotelAvailability = picnicSpots.stream()
-                .filter(x->x.getHotelAndRestuarantAvailabilty())
+                .filter(x->x.isHotelAndRestaurantAvailability())
                 .findFirst()
                 .orElse(null);
         System.out.println("Best spot as per hotel availability: " + bestSpotByHotelAvailability);
     }
 }
-
