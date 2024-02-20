@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -7,7 +8,7 @@ import java.util.ListIterator;
 //pojo-plain old java object (legacy)
 //constructor, setter and getter toString() 
 //equals() and hashCode()
-class Student implements Comparable<Student>{
+class Student {
 	private int id;
 	private String name;
 	private double cgpa;
@@ -41,11 +42,36 @@ class Student implements Comparable<Student>{
 	public String toString() {
 		return "Student [id=" + id + ", name=" + name + ", cgpa=" + cgpa + "]";
 	}
-	@Override
-	public int compareTo(Student second) {
-		return Integer.compare(this.id,second.id);
+}
+class IdComparator implements Comparator<Student> {
+	public int compare(Student f,Student s) {
+		return Integer.compare(f.getId(), s.getId());
 	}
-	
+}
+class CgpaComparator implements Comparator<Student> {
+	public int compare(Student f,Student s) {
+		return Double.compare(f.getCgpa(), s.getCgpa());
+	}
+}
+class NameComparator implements Comparator<Student> {
+	public int compare(Student f,Student s) {
+		return f.getName().compareTo(s.getName());
+	}
+}
+class IdComparatorDesc implements Comparator<Student> {
+	public int compare(Student f,Student s) {
+		return Integer.compare(s.getId(), f.getId());
+	}
+}
+class CgpaComparatorDesc implements Comparator<Student> {
+	public int compare(Student f,Student s) {
+		return Double.compare(s.getCgpa(), f.getCgpa());
+	}
+}
+class NameComparatorDesc implements Comparator<Student> {
+	public int compare(Student f,Student s) {
+		return s.getName().compareTo(f.getName());
+	}
 }
 public class TEST4 {
 	public static void main(String[] args) {
@@ -99,7 +125,8 @@ public class TEST4 {
 			System.out.println("is not present in the list");
 		
 		//binary search
-	int p=Collections.binarySearch(studentlist,new Student(342,"upendra",8.3));
+	int p=Collections.binarySearch
+			(studentlist,new Student(342,"upendra",8.3),new IdComparator());
 		System.out.println("is present in the list at "+p+" index");
 		//binary search returns index of the object from a sorted collection
 		Student ob1=new Student(101,"amith",7.5);
@@ -110,23 +137,30 @@ public class TEST4 {
 		List<Student> secondlist=new ArrayList<Student>();
 		secondlist.add(ob1);secondlist.add(ob2);secondlist.add(ob3);
 		System.out.println("second list "+secondlist);
-		Collections.sort(secondlist);
-		int index=Collections.binarySearch(secondlist, ob4);//-1-p
+		Collections.sort(secondlist,new IdComparator());
+		int index=Collections.binarySearch(secondlist, ob4,new IdComparator());//-1-p
 		System.out.println(index);
 		
-		//sort studentlist in ascending order of id number
-		Collections.sort(studentlist);
-		System.out.println("Ascending order"+studentlist);
-		//sort studentlist in descending order of id number
-		Collections.sort(studentlist,Collections.reverseOrder());
-		System.out.println("Descending order"+studentlist);
-		//sort studentlist in ascending order of cgpa
 		
-		//sort studentlist in descending order of cgpa
+		//sort by id
+		Collections.sort(studentlist,new IdComparator());
+		System.out.println("Ascending by id"+studentlist);
+		//sort by name
+		Collections.sort(studentlist,new NameComparator());
+		System.out.println("Ascending by name"+studentlist);
+		//sort by cgpa
+		Collections.sort(studentlist,new CgpaComparator());
+		System.out.println("Ascending by cgpa"+studentlist);
 		
-		//sort studentlist in ascending order of name
-		
-		//sort studentlist in descending order of name
+		//sort by id
+		Collections.sort(studentlist,new IdComparatorDesc());
+		System.out.println("Descending by id"+studentlist);
+		//sort by name
+		Collections.sort(studentlist,new NameComparatorDesc());
+		System.out.println("Descending by name"+studentlist);
+		//sort by cgpa
+		Collections.sort(studentlist,new CgpaComparatorDesc());
+		System.out.println("Descending by cgpa"+studentlist);
 		
 		
 		// sort using method reference
