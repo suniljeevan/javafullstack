@@ -138,17 +138,41 @@ ListIterator<Studentt> itr=list.listIterator();
 double att_percent;
 String performance;
 Scanner sc=new Scanner(System.in);
-Studentt s;
+
 for (Studentt i:list) {
-	
-	i.setScore(100);
-	
-	i.setGrade("O");
-	
+	System.out.println("enter attendance, class performance");
+			att_percent=sc.nextDouble();
+			performance=sc.next();
+			if(att_percent==100 && performance.equals("good"))
+			{
+			im=50;
+			em=50;
+			i.setScore(im+em);;
+			i.setGrade("O");
+			}else {
+			if(att_percent==100 && performance.equals("bad"))
+			{
+			im=40;
+			em=50;
+			i.setScore(im+em);;
+			i.setGrade("A+");
+			}else {
+			if(att_percent==80 && performance.equals("bad"))
+			{
+			im=30;
+			em=50;
+			i.setScore(im+em);;
+			i.setGrade("A");
+			}else {
+			im=10;
+			em=50;
+			i.setScore(im+em);;
+			i.setGrade("F");
+			}
+			}
+            }
 }
 System.out.println(list);
-
-
 	}
 	}
 
