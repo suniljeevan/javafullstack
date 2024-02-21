@@ -36,7 +36,7 @@ public String toString() {
 }
 
 }
-class Studentt {
+class Studentt implements Comparable<Studentt>{
 private int id;
 private String name;
 private double score;
@@ -88,23 +88,10 @@ public String toString() {
 	return "Studentt [id=" + id + ", name=" + name + ", score=" + score + ", grade=" + grade + ", course=" + course
 			+ "]";
 }
-@Override
-public int hashCode() {
-	return Objects.hash(course, grade, id, name, score);
+public int compareTo(Studentt second) {
+	return Integer.compare(this.id,second.id);
 }
-@Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	Studentt other = (Studentt) obj;
-	return Objects.equals(course, other.course) && Objects.equals(grade, other.grade) && id == other.id
-			&& Objects.equals(name, other.name)
-			&& Double.doubleToLongBits(score) == Double.doubleToLongBits(other.score);
-}
+
 
 }
 public class Test8 {
@@ -147,14 +134,14 @@ for (Studentt i:list) {
 			{
 			im=50;
 			em=50;
-			i.setScore(im+em);;
+			i.setScore(im+em);
 			i.setGrade("O");
 			}else {
 			if(att_percent==100 && performance.equals("bad"))
 			{
 			im=40;
 			em=50;
-			i.setScore(im+em);;
+			i.setScore(im+em);
 			i.setGrade("A+");
 			}else {
 			if(att_percent==80 && performance.equals("bad"))
@@ -166,15 +153,29 @@ for (Studentt i:list) {
 			}else {
 			im=10;
 			em=50;
-			i.setScore(im+em);;
+			i.setScore(im+em);
 			i.setGrade("F");
 			}
 			}
             }
 }
+
 System.out.println(list);
+//find any students grade 
+Studentt ob=new Studentt(1,"sunny",0.0,null,c1);
+Collections.sort(list);
+int index=Collections.binarySearch(list, ob);
+System.out.println("grade of student ob is "+list.get(index).getGrade());
+
+
+
+
 	}
 	}
+
+
+
+
 
 
 
