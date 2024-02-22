@@ -1,0 +1,142 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+class Student implements Comparable<Student>{
+	private int id;
+	private String name;
+	private double cgpa;
+	private String address;
+	//add getter and setter
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getCgpa() {
+		return cgpa;
+	}
+	public void setCgpa(double cgpa) {
+		this.cgpa = cgpa;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	//generate constructor
+	public Student(int id, String name, double cgpa, String address) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.cgpa = cgpa;
+		this.address = address;
+	}
+	public Student() {
+		super();
+	}
+	//add toString
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", cgpa=" + cgpa + ", address=" + address + "]";
+	}
+	@Override
+	public int compareTo(Student second) {
+		return Double.compare(this.cgpa,second.cgpa);
+	}
+	
+}
+public class TEST4 {
+	public static void main(String[] args) {
+    List<Student> list1=new ArrayList<Student>();
+    Student ob1=new Student(63,"Lisha",8.5,"bengaluru");
+    Student ob2=new Student(64,"Deepika",8.3,"AndhraPradesh");
+    Student ob3=new Student(70,"varun",8,"Hebbal");
+    Student ob4=new Student(75,"Abhishek",7.4,"MGRoad");
+    Student ob5=new Student(76,"Hira",7.6,"UP");
+    Student ob6=new Student(78,"Parshuram",8.3,"Tirupathi");
+    Student ob7=new Student(79,"Nihal",8,"Chikballapur");
+    Student ob8=new Student(82,"Nisarga",7.4,"Bengaluru");
+    Student ob9=new Student(84,"Gokul",8,"Mumbai");
+    Student ob10=new Student(87,"Pavan",8.3,"Punjab");
+    Student ob11=new Student(88,"Yogesh",8,"Gujrat");
+    Student ob12=new Student(90,"Lavanya",8.5,"yelhanka");
+    list1.add(ob1);list1.add(ob2);list1.add(ob3);
+    list1.add(ob4);list1.add(ob5);list1.add(ob6);list1.add(ob7);
+    list1.add(ob8);list1.add(ob9);list1.add(ob10);
+    list1.add(ob11);list1.add(ob12);
+    //Displaying list as single object
+    System.out.println(list1);
+    //Displaying contents
+    list1.stream().forEach(x->System.out.println(x));
+    // Displaying first 5 students
+    for(int i=0;i<=4;i++) {
+    	System.out.println(list1.get(i));
+    }
+    //Filtering with some condition
+    System.out.println("Students belonging from bangalore");
+    List<Student> list2=list1.stream()
+    		     .filter(x->x.getAddress()
+    		     .equalsIgnoreCase("bengaluru"))
+    		     .collect(Collectors.toList());
+    System.out.println(list2);
+    
+    System.out.println("Students are not belonging from and punjab and mumbai");
+    list2=list1.stream()
+    		.filter(x->
+    		!((x.getAddress().equalsIgnoreCase("punjab")||
+    		x.getAddress().equalsIgnoreCase("mumbai"))))
+    		.collect(Collectors.toList());
+    System.out.println(list2);
+    System.out.println("Students whose cgpa are greater than 8.4");
+    list2=list1.stream()
+    		.filter(x->x.getCgpa()>8.4)
+    		.collect(Collectors.toList());
+    System.out.println(list2);
+    //check any student whose name starts with letter A
+    boolean c=list1.stream()
+    		.anyMatch(x->x.getName().startsWith("A"));
+    System.out.println("A name student exists "+c);
+    //check all students cgpa >6 or not
+    c=list1.stream()
+    		.allMatch(x->x.getCgpa()>6);
+    System.out.println("all students are passed "+c);
+    //check all students cgpa>10 
+    c=list1.stream()
+    		.noneMatch(x->x.getCgpa()>10);
+    System.out.println("no wrong entry "+c);
+    Student ob=list1.stream()
+    .max((x,y)->Double.compare(x.getCgpa(), y.getCgpa())
+    		).get();
+    System.out.println("student with highest cgpa");
+    System.out.println(ob);
+    System.out.println("filter all students with highest cgpa");
+    list2=list1.stream()
+    		.filter(x->x.getCgpa()==ob.getCgpa())
+    		.collect(Collectors.toList());
+    System.out.println(list2);
+    
+    
+    
+    
+    
+    
+	}
+	
+}
+
+
+
+
+
+
+
+
