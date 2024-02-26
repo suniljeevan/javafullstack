@@ -7,6 +7,14 @@ class Hotel {
 	
 	private double dist_from_location;
 	private double charges;
+	private double reviews;
+	
+	public double getReviews() {
+		return reviews;
+	}
+	public void setReviews(double reviews) {
+		this.reviews = reviews;
+	}
 	public String getName() {
 		return name;
 	}
@@ -26,19 +34,23 @@ class Hotel {
 		this.dist_from_location = dist_from_location;
 	}
 	
-	public Hotel(String name, double dist_from_location, double charges) {
+	
+	public Hotel(String name, double dist_from_location, double charges, double reviews) {
 		super();
 		this.name = name;
 		this.dist_from_location = dist_from_location;
 		this.charges = charges;
+		this.reviews = reviews;
 	}
 	public Hotel() {
 		super();
 	}
 	@Override
 	public String toString() {
-		return "Hotel [name=" + name + ", charges=" + charges + ", dist_from_location=" + dist_from_location + "]";
+		return "Hotel [name=" + name + ", dist_from_location=" + dist_from_location + ", charges=" + charges
+				+ ", reviews=" + reviews + "]";
 	}
+	
 	
 }
 
@@ -98,7 +110,7 @@ class PicnicSpot {
    
 }
 
-public class PicnicSpotsAnalyzer2 {
+public class PicnicSpotsAnalyzer {
     public static void main(String[] args) {
     	List<Hotel> hotellist1=new ArrayList<Hotel>();
     	List<Hotel> hotellist2=new ArrayList<Hotel>();
@@ -143,12 +155,18 @@ public class PicnicSpotsAnalyzer2 {
                 .min((x,y)->Double.compare(x.getDist_from_location(), y.getDist_from_location()))
                 .get();
                 
-        System.out.println("Best spot as per distance: " + bestHotelByDistance);
+        System.out.println("Best Hotel as per distance: " + bestHotelByDistance);
         // Find the best spot as per distance and find the best hotel 
         // as per price
+        PicnicSpot best_spot_as_per_distance=
+        picnicSpots.stream().min((x,y)->Double.compare(x.getDistance(), y.getDistance()))
+        		.get();
+        System.out.println("Best spot as per distance "+best_spot_as_per_distance);
         
+       Hotel best_hotel_as_per_price= best_spot_as_per_distance.getHotels().stream()
+        .min((x,y)->Double.compare(x.getCharges(), y.getCharges())).get();
         
-        
+       System.out.println("Best hotel as per price "+best_hotel_as_per_price);
         
 
         // Find the best spot as per reviews
