@@ -117,25 +117,25 @@ public class PicnicSpotsAnalyzer {
     	List<Hotel> hotellist3=new ArrayList<Hotel>();
     	List<Hotel> hotellist4=new ArrayList<Hotel>();
     	List<Hotel> hotellist5=new ArrayList<Hotel>();
-    	hotellist1.add(new Hotel("Taj",9,5000));
-    	hotellist1.add(new Hotel("Mayfair",7,4500));
-    	hotellist1.add(new Hotel("PalaceVilla",14,3500));
-    	hotellist2.add(new Hotel("Tajmahal",9,5000));
-    	hotellist2.add(new Hotel("Blue Lagoon",7,4500));
-    	hotellist2.add(new Hotel("MysoreTemple",14,3500));
-    	hotellist2.add(new Hotel("KingsNight",14,3500));
-    	hotellist3.add(new Hotel("Taj",9,5000));
-    	hotellist3.add(new Hotel("Mayfair",7,4500));
-    	hotellist3.add(new Hotel("PalaceVilla",14,3500));
-    	hotellist3.add(new Hotel("Tajmahal",9,5000));
-    	hotellist4.add(new Hotel("Blue Lagoon",7,4500));
-    	hotellist4.add(new Hotel("MysoreTemple",14,3500));
-    	hotellist4.add(new Hotel("KingsNight",14,3500));
-    	hotellist5.add(new Hotel("PalaceVilla",14,3500));
-    	hotellist5.add(new Hotel("Tajmahal",9,5000));
-    	hotellist5.add(new Hotel("Blue Lagoon",7,4500));
-    	hotellist5.add(new Hotel("MysoreTemple",14,3500));
-    	hotellist5.add(new Hotel("KingsNight",14,3500));
+    	hotellist1.add(new Hotel("Taj",9,5000,4.6));
+    	hotellist1.add(new Hotel("Mayfair",7,4500,4.1));
+    	hotellist1.add(new Hotel("PalaceVilla",14,3500,3.4));
+    	hotellist2.add(new Hotel("Tajmahal",9,5000,4));
+    	hotellist2.add(new Hotel("Blue Lagoon",7,4500,5));
+    	hotellist2.add(new Hotel("MysoreTemple",14,3500,2.3));
+    	hotellist2.add(new Hotel("KingsNight",14,3500,3.5));
+    	hotellist3.add(new Hotel("Taj",9,5000,5));
+    	hotellist3.add(new Hotel("Mayfair",7,4500,4));
+    	hotellist3.add(new Hotel("PalaceVilla",14,3500,2.8));
+    	hotellist3.add(new Hotel("Tajmahal",9,5000,4.8));
+    	hotellist4.add(new Hotel("Blue Lagoon",7,4500,3.5));
+    	hotellist4.add(new Hotel("MysoreTemple",14,3500,4.0));
+    	hotellist4.add(new Hotel("KingsNight",14,3500,2));
+    	hotellist5.add(new Hotel("PalaceVilla",14,3500,5));
+    	hotellist5.add(new Hotel("Tajmahal",9,5000,4));
+    	hotellist5.add(new Hotel("Blue Lagoon",7,4500,4.7));
+    	hotellist5.add(new Hotel("MysoreTemple",14,3500,3.5));
+    	hotellist5.add(new Hotel("KingsNight",14,3500,2.9));
     	
     	
     	
