@@ -154,29 +154,34 @@ public class PicnicSpotsAnalyzer {
         // Creating a List of PicnicSpot objects
         List<PicnicSpot> picnicSpots = new ArrayList<>();
         List<Hotel> hotellist1 = new ArrayList<Hotel>();
-        hotellist1.add(new Hotel("Taj",10,5000,4.5));
-        hotellist1.add(new Hotel("Mayfair",9,6000,4.3));
-        hotellist1.add(new Hotel("RajMahal",8,7000,3.9));
-        hotellist1.add(new Hotel("TajMahal",5,15000,4.2));
+        List<CustomerReview> reviewlist1=new ArrayList<>();
+        reviewlist1.add(new CustomerReview("Pankaj kumar","pankaj@gmail.com","very bad for family",2.3));
+        reviewlist1.add(new CustomerReview("Pavan kalyan","pavan@gmail.com","very good for couples",4.9));
+        reviewlist1.add(new CustomerReview("sahoo ","sahoo@yahoo.com","Not better facilities",2.5));
+        reviewlist1.add(new CustomerReview("Pankaj kumar","pankaj@gmail.com","very bad for family",2.3));
+        hotellist1.add(new Hotel("Taj",10,5000,reviewlist1));
+        hotellist1.add(new Hotel("Mayfair",9,6000,reviewlist1));
+        hotellist1.add(new Hotel("RajMahal",8,7000,reviewlist1));
+        hotellist1.add(new Hotel("TajMahal",5,15000,reviewlist1));
         List<Hotel> hotellist2 = new ArrayList<Hotel>();
-        hotellist2.add(new Hotel("Taj",4,10000,4.1));
-        hotellist2.add(new Hotel("Mayfair",7,6000,3.7));
-        hotellist2.add(new Hotel("RajMahal",5,7000,3.4));
-        hotellist2.add(new Hotel("TajMahal",8,5000,4.2));
+        hotellist2.add(new Hotel("Taj",4,10000,reviewlist1));
+        hotellist2.add(new Hotel("Mayfair",7,6000,reviewlist1));
+        hotellist2.add(new Hotel("RajMahal",5,7000,reviewlist1));
+        hotellist2.add(new Hotel("TajMahal",8,5000,reviewlist1));
         List<Hotel> hotellist3 = new ArrayList<Hotel>();
-        hotellist3.add(new Hotel("Taj",14,10000,2.9));
-        hotellist3.add(new Hotel("Mayfair",17,6000,3.3));
-        hotellist3.add(new Hotel("RajMahal",15,7000,2.4));
-        hotellist3.add(new Hotel("TajMahal",18,5000,2.8));
+        hotellist3.add(new Hotel("Taj",14,10000,reviewlist1));
+        hotellist3.add(new Hotel("Mayfair",17,6000,reviewlist1));
+        hotellist3.add(new Hotel("RajMahal",15,7000,reviewlist1));
+        hotellist3.add(new Hotel("TajMahal",18,5000,reviewlist1));
         List<Hotel> hotellist4 = new ArrayList<Hotel>();
-        hotellist4.add(new Hotel("Taj",14,10000,2.9));
-        hotellist4.add(new Hotel("Mayfair",17,6000,3.3));
-        hotellist4.add(new Hotel("RajMahal",15,7000,2.4));
-        hotellist4.add(new Hotel("TajMahal",18,5000,2.8));
+        hotellist4.add(new Hotel("Taj",14,10000,reviewlist1));
+        hotellist4.add(new Hotel("Mayfair",17,6000,reviewlist1));
+        hotellist4.add(new Hotel("RajMahal",15,7000,reviewlist1));
+        hotellist4.add(new Hotel("TajMahal",18,5000,reviewlist1));
         List<Hotel> hotellist5 = new ArrayList<Hotel>();
-        hotellist5.add(new Hotel("Taj",14,10000,2.9));
-        hotellist5.add(new Hotel("Mayfair",17,6000,3.3));
-        hotellist5.add(new Hotel("RajMahal",15,7000,2.4));
+        hotellist5.add(new Hotel("Taj",14,10000,reviewlist1));
+        hotellist5.add(new Hotel("Mayfair",17,6000,reviewlist1));
+        hotellist5.add(new Hotel("RajMahal",15,7000,reviewlist1));
         picnicSpots.add(new PicnicSpot("Beach", 10.5, hotellist1, 4.2));
         picnicSpots.add(new PicnicSpot("Mountain", 25.0, hotellist2, 4.5));
         picnicSpots.add(new PicnicSpot("Park", 5.2, hotellist3, 4.0));
@@ -196,26 +201,7 @@ public class PicnicSpotsAnalyzer {
 
         // Find the best spot as per reviews
         //Find the best Hotel as per customer review
-        Hotel bestHotelByReviews = picnicSpots.stream()
-                .max((x,y)->Double.compare(x.getReviews(),y.getReviews())).get()
-                .getHotelList().stream().
-                max((p,q)->Double.compare(p.getCust_review(), q.getCust_review()))
-                .get();
-                
-        System.out.println("Best Hotel as per reviews: " + bestHotelByReviews);
-        // find all spots with all hotels available
-        System.out.println("All spots with all hotels");
-        List<Hotel> list;
-        Hotel h;
-        for(int i=0;i<picnicSpots.size();i++) {
-        System.out.print(picnicSpots.get(i).getName()+":");
-        list=picnicSpots.get(i).getHotelList();
-        h=list.stream()
-        .min((x,y)->Double.compare(x.getCharges(),
-        		y.getCharges())).get();
-        System.out.print(h.getBrandName()+" is cheaper");
-        System.out.println();
-        }
+       
     }
 }
 
