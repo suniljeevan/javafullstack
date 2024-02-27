@@ -109,33 +109,25 @@ public class PicnicSpotsAnalyzer {
         hotellist1.add(new Hotel("Mayfair",9,6000,4.3));
         hotellist1.add(new Hotel("RajMahal",8,7000,3.9));
         hotellist1.add(new Hotel("TajMahal",5,15000,4.2));
-        
-        
         List<Hotel> hotellist2 = new ArrayList<Hotel>();
         hotellist2.add(new Hotel("Taj",4,10000,4.1));
         hotellist2.add(new Hotel("Mayfair",7,6000,3.7));
         hotellist2.add(new Hotel("RajMahal",5,7000,3.4));
         hotellist2.add(new Hotel("TajMahal",8,5000,4.2));
-        
         List<Hotel> hotellist3 = new ArrayList<Hotel>();
         hotellist3.add(new Hotel("Taj",14,10000,2.9));
         hotellist3.add(new Hotel("Mayfair",17,6000,3.3));
         hotellist3.add(new Hotel("RajMahal",15,7000,2.4));
         hotellist3.add(new Hotel("TajMahal",18,5000,2.8));
-        
         List<Hotel> hotellist4 = new ArrayList<Hotel>();
         hotellist4.add(new Hotel("Taj",14,10000,2.9));
         hotellist4.add(new Hotel("Mayfair",17,6000,3.3));
         hotellist4.add(new Hotel("RajMahal",15,7000,2.4));
         hotellist4.add(new Hotel("TajMahal",18,5000,2.8));
-        
         List<Hotel> hotellist5 = new ArrayList<Hotel>();
         hotellist5.add(new Hotel("Taj",14,10000,2.9));
         hotellist5.add(new Hotel("Mayfair",17,6000,3.3));
         hotellist5.add(new Hotel("RajMahal",15,7000,2.4));
-        
-        
-        
         picnicSpots.add(new PicnicSpot("Beach", 10.5, hotellist1, 4.2));
         picnicSpots.add(new PicnicSpot("Mountain", 25.0, hotellist2, 4.5));
         picnicSpots.add(new PicnicSpot("Park", 5.2, hotellist3, 4.0));
@@ -143,15 +135,25 @@ public class PicnicSpotsAnalyzer {
         picnicSpots.add(new PicnicSpot("Forest", 30.3, hotellist5, 4.1));
 
         // Find the best spot as per distance
-        PicnicSpot bestSpotByDistance = picnicSpots.stream()
-                .min((x,y)->Double.compare(x.getDistance(),y.getDistance())).get();
-        System.out.println("Best spot as per distance: " + bestSpotByDistance);
+        
+        // Find the best hotel for this spot by distance
+        Hotel bestHotelByDistance = picnicSpots.stream()
+                .min((x,y)->Double.compare(x.getDistance(),y.getDistance()))
+                .get()
+                .getHotelList().stream()
+                .min((p,q)->Double.compare(p.getDistance(), q.getDistance()))
+                .get();
+        System.out.println("Best Hotel as per distance: " + bestHotelByDistance);
 
         // Find the best spot as per reviews
-        PicnicSpot bestSpotByReviews = picnicSpots.stream()
-                .max((x,y)->Double.compare(x.getReviews(),y.getReviews())).get();
+        //Find the best Hotel as per customer review
+        Hotel bestHotelByReviews = picnicSpots.stream()
+                .max((x,y)->Double.compare(x.getReviews(),y.getReviews())).get()
+                .getHotelList().stream().
+                max((p,q)->Double.compare(p.getCust_review(), q.getCust_review()))
+                .get();
                 
-        System.out.println("Best spot as per reviews: " + bestSpotByReviews);
+        System.out.println("Best Hotel as per reviews: " + bestHotelByReviews);
 
         
     }
