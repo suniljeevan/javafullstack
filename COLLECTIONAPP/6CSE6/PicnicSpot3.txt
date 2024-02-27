@@ -1,0 +1,226 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.stream.Collectors;
+class CustomerReview {
+	private String cname;
+	private String email;
+	private String reviewText;
+	private double rating;
+	public String getCname() {
+		return cname;
+	}
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getReviewText() {
+		return reviewText;
+	}
+	public void setReviewText(String reviewText) {
+		this.reviewText = reviewText;
+	}
+	public double getRating() {
+		return rating;
+	}
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+	public CustomerReview(String cname, String email, String reviewText, double rating) {
+		super();
+		this.cname = cname;
+		this.email = email;
+		this.reviewText = reviewText;
+		this.rating = rating;
+	}
+	public CustomerReview() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "CustomerReview [cname=" + cname + ", email=" + email + ", reviewText=" + reviewText + ", rating="
+				+ rating + "]";
+	}
+	
+}
+
+
+
+class Hotel {
+	private String brandName;
+	private double distance;
+	private double charges;
+	private List<CustomerReview> reviews;
+	//getter and setter , constructor and toString()
+	public String getBrandName() {
+		return brandName;
+	}
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+	public double getCharges() {
+		return charges;
+	}
+	public void setCharges(double charges) {
+		this.charges = charges;
+	}
+	public List<CustomerReview> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<CustomerReview> reviews) {
+		this.reviews = reviews;
+	}
+	public Hotel(String brandName, double distance, double charges, List<CustomerReview> reviews) {
+		super();
+		this.brandName = brandName;
+		this.distance = distance;
+		this.charges = charges;
+		this.reviews = reviews;
+	}
+	public Hotel() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Hotel [brandName=" + brandName + ", distance=" + distance + ", charges=" + charges + ", reviews="
+				+ reviews + "]";
+	}
+	
+}
+
+class PicnicSpot {
+    private String name;
+    double distance;
+    private List<Hotel> hotelList;
+    double reviews;
+//getter and setter , constructor , toString()
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+	public List<Hotel> getHotelList() {
+		return hotelList;
+	}
+	public void setHotelList(List<Hotel> hotelList) {
+		this.hotelList = hotelList;
+	}
+	public double getReviews() {
+		return reviews;
+	}
+	public void setReviews(double reviews) {
+		this.reviews = reviews;
+	}
+	public PicnicSpot(String name, double distance, List<Hotel> hotelList, double reviews) {
+		super();
+		this.name = name;
+		this.distance = distance;
+		this.hotelList = hotelList;
+		this.reviews = reviews;
+	}
+	public PicnicSpot() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "PicnicSpot [name=" + name + ", distance=" + distance + ", hotelList=" + hotelList + ", reviews="
+				+ reviews + "]";
+	}
+    
+    
+}
+
+public class PicnicSpotsAnalyzer {
+    public static void main(String[] args) {
+        // Creating a List of PicnicSpot objects
+        List<PicnicSpot> picnicSpots = new ArrayList<>();
+        List<Hotel> hotellist1 = new ArrayList<Hotel>();
+        hotellist1.add(new Hotel("Taj",10,5000,4.5));
+        hotellist1.add(new Hotel("Mayfair",9,6000,4.3));
+        hotellist1.add(new Hotel("RajMahal",8,7000,3.9));
+        hotellist1.add(new Hotel("TajMahal",5,15000,4.2));
+        List<Hotel> hotellist2 = new ArrayList<Hotel>();
+        hotellist2.add(new Hotel("Taj",4,10000,4.1));
+        hotellist2.add(new Hotel("Mayfair",7,6000,3.7));
+        hotellist2.add(new Hotel("RajMahal",5,7000,3.4));
+        hotellist2.add(new Hotel("TajMahal",8,5000,4.2));
+        List<Hotel> hotellist3 = new ArrayList<Hotel>();
+        hotellist3.add(new Hotel("Taj",14,10000,2.9));
+        hotellist3.add(new Hotel("Mayfair",17,6000,3.3));
+        hotellist3.add(new Hotel("RajMahal",15,7000,2.4));
+        hotellist3.add(new Hotel("TajMahal",18,5000,2.8));
+        List<Hotel> hotellist4 = new ArrayList<Hotel>();
+        hotellist4.add(new Hotel("Taj",14,10000,2.9));
+        hotellist4.add(new Hotel("Mayfair",17,6000,3.3));
+        hotellist4.add(new Hotel("RajMahal",15,7000,2.4));
+        hotellist4.add(new Hotel("TajMahal",18,5000,2.8));
+        List<Hotel> hotellist5 = new ArrayList<Hotel>();
+        hotellist5.add(new Hotel("Taj",14,10000,2.9));
+        hotellist5.add(new Hotel("Mayfair",17,6000,3.3));
+        hotellist5.add(new Hotel("RajMahal",15,7000,2.4));
+        picnicSpots.add(new PicnicSpot("Beach", 10.5, hotellist1, 4.2));
+        picnicSpots.add(new PicnicSpot("Mountain", 25.0, hotellist2, 4.5));
+        picnicSpots.add(new PicnicSpot("Park", 5.2, hotellist3, 4.0));
+        picnicSpots.add(new PicnicSpot("Lake", 15.8, hotellist4, 4.8));
+        picnicSpots.add(new PicnicSpot("Forest", 30.3, hotellist5, 4.1));
+
+        // Find the best spot as per distance
+        
+        // Find the best hotel for this spot by distance
+        Hotel bestHotelByDistance = picnicSpots.stream()
+                .min((x,y)->Double.compare(x.getDistance(),y.getDistance()))
+                .get()
+                .getHotelList().stream()
+                .min((p,q)->Double.compare(p.getDistance(), q.getDistance()))
+                .get();
+        System.out.println("Best Hotel as per distance: " + bestHotelByDistance);
+
+        // Find the best spot as per reviews
+        //Find the best Hotel as per customer review
+        Hotel bestHotelByReviews = picnicSpots.stream()
+                .max((x,y)->Double.compare(x.getReviews(),y.getReviews())).get()
+                .getHotelList().stream().
+                max((p,q)->Double.compare(p.getCust_review(), q.getCust_review()))
+                .get();
+                
+        System.out.println("Best Hotel as per reviews: " + bestHotelByReviews);
+        // find all spots with all hotels available
+        System.out.println("All spots with all hotels");
+        List<Hotel> list;
+        Hotel h;
+        for(int i=0;i<picnicSpots.size();i++) {
+        System.out.print(picnicSpots.get(i).getName()+":");
+        list=picnicSpots.get(i).getHotelList();
+        h=list.stream()
+        .min((x,y)->Double.compare(x.getCharges(),
+        		y.getCharges())).get();
+        System.out.print(h.getBrandName()+" is cheaper");
+        System.out.println();
+        }
+    }
+}
+
+
+
+
+
+
