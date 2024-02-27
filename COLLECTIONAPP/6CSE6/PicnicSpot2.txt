@@ -7,7 +7,7 @@ class Hotel {
 	private double distance;
 	private double charges;
 	private double cust_review;
-	//getter and setter , constructo and toString()
+	//getter and setter , constructor and toString()
 	public String getBrandName() {
 		return brandName;
 	}
@@ -104,15 +104,43 @@ public class PicnicSpotsAnalyzer {
     public static void main(String[] args) {
         // Creating a List of PicnicSpot objects
         List<PicnicSpot> picnicSpots = new ArrayList<>();
-        List<Hotel> hotels = new ArrayList<Hotel>();
+        List<Hotel> hotellist1 = new ArrayList<Hotel>();
+        hotellist1.add(new Hotel("Taj",10,5000,4.5));
+        hotellist1.add(new Hotel("Mayfair",9,6000,4.3));
+        hotellist1.add(new Hotel("RajMahal",8,7000,3.9));
+        hotellist1.add(new Hotel("TajMahal",5,15000,4.2));
+        
+        
+        List<Hotel> hotellist2 = new ArrayList<Hotel>();
+        hotellist2.add(new Hotel("Taj",4,10000,4.1));
+        hotellist2.add(new Hotel("Mayfair",7,6000,3.7));
+        hotellist2.add(new Hotel("RajMahal",5,7000,3.4));
+        hotellist2.add(new Hotel("TajMahal",8,5000,4.2));
+        
+        List<Hotel> hotellist3 = new ArrayList<Hotel>();
+        hotellist3.add(new Hotel("Taj",14,10000,2.9));
+        hotellist3.add(new Hotel("Mayfair",17,6000,3.3));
+        hotellist3.add(new Hotel("RajMahal",15,7000,2.4));
+        hotellist3.add(new Hotel("TajMahal",18,5000,2.8));
+        
+        List<Hotel> hotellist4 = new ArrayList<Hotel>();
+        hotellist4.add(new Hotel("Taj",14,10000,2.9));
+        hotellist4.add(new Hotel("Mayfair",17,6000,3.3));
+        hotellist4.add(new Hotel("RajMahal",15,7000,2.4));
+        hotellist4.add(new Hotel("TajMahal",18,5000,2.8));
+        
+        List<Hotel> hotellist5 = new ArrayList<Hotel>();
+        hotellist5.add(new Hotel("Taj",14,10000,2.9));
+        hotellist5.add(new Hotel("Mayfair",17,6000,3.3));
+        hotellist5.add(new Hotel("RajMahal",15,7000,2.4));
         
         
         
-        picnicSpots.add(new PicnicSpot("Beach", 10.5, true, 4.2));
-        picnicSpots.add(new PicnicSpot("Mountain", 25.0, false, 4.5));
-        picnicSpots.add(new PicnicSpot("Park", 5.2, true, 4.0));
-        picnicSpots.add(new PicnicSpot("Lake", 15.8, false, 4.8));
-        picnicSpots.add(new PicnicSpot("Forest", 30.3, false, 4.1));
+        picnicSpots.add(new PicnicSpot("Beach", 10.5, hotellist1, 4.2));
+        picnicSpots.add(new PicnicSpot("Mountain", 25.0, hotellist2, 4.5));
+        picnicSpots.add(new PicnicSpot("Park", 5.2, hotellist3, 4.0));
+        picnicSpots.add(new PicnicSpot("Lake", 15.8, hotellist4, 4.8));
+        picnicSpots.add(new PicnicSpot("Forest", 30.3, hotellist5, 4.1));
 
         // Find the best spot as per distance
         PicnicSpot bestSpotByDistance = picnicSpots.stream()
@@ -125,11 +153,6 @@ public class PicnicSpotsAnalyzer {
                 
         System.out.println("Best spot as per reviews: " + bestSpotByReviews);
 
-        // Find the best spot as per hotel availability
-        PicnicSpot bestSpotByHotelAvailability = picnicSpots.stream()
-                .filter(x->x.isHotelAndRestaurantAvailability())
-                .findFirst()
-                .orElse(null);
-        System.out.println("Best spot as per hotel availability: " + bestSpotByHotelAvailability);
+        
     }
 }
