@@ -1,5 +1,6 @@
 import java.util.*;
-class Book {
+import java.util.stream.Collectors;
+class Book implements Comparable<Book>{
 	private int bookId;
 	private String bookTitle;
 	private String publisher;
@@ -79,7 +80,9 @@ class Book {
 				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
 				&& publishedYear == other.publishedYear && Objects.equals(publisher, other.publisher);
 	}
-	
+	public int compareTo(Book second) {
+		return Integer.compare(this.bookId, second.bookId);
+	}
 	
 }
 public class Test9 {
@@ -96,7 +99,7 @@ public class Test9 {
 		
 		Set<Book> books=new HashSet<Book>();
 		books.add(new Book(1001,"Pride and Prejudice","whitehall",823,1,1813));
-		books.add(new Book(1002,"The great gatsby","printmedia",1000,1,1900));
+		books.add(new Book(1002,"The great gatsby","whitehall",1000,1,1900));
 		books.add(new Book(1003,"To kill a mockingbird","Roll books",823,1,1913));
 		books.add(new Book(1004,"1984","Rupa Publication",823,1,1913));
 		books.add(new Book(1005,"Animal Farm","Apk Publishers",823,1,1927));
@@ -120,7 +123,33 @@ public class Test9 {
 								.get();
 				System.out.println("Book with more price is "+morepricedbook);
 		//sort all book by name 
-		
+		// reduce to reduce cost  which is double
+	    // map books to double 
+  	double totalprice=books.stream()
+			.mapToDouble(x->x.getPrice())
+			.reduce(0, (sum,y)->sum+y);
+	System.out.println("Total price "+totalprice);
+	   	// print the distinct publishers
+	   // to be updated
+	
+	TreeSet<String> sortedstrings=new TreeSet<String>();
+	sortedstrings.add("sunil");
+	sortedstrings.add("anil");
+	sortedstrings.add("sunit");
+	sortedstrings.add("bijay");
+	System.out.println("Sorted strings:"+sortedstrings);
+    TreeSet<Book> sortedbooks = new TreeSet<Book>();
+    sortedbooks.add(new Book(1001,"Pride and Prejudice","whitehall",823,1,1813));
+	sortedbooks.add(new Book(1002,"The great gatsby","whitehall",1000,1,1900));
+	sortedbooks.add(new Book(1003,"To kill a mockingbird","Roll books",823,1,1913));
+	sortedbooks.add(new Book(1004,"1984","Rupa Publication",823,1,1913));
+	sortedbooks.add(new Book(1005,"Animal Farm","Apk Publishers",823,1,1927));
+	sortedbooks.add(new Book(1006,"Anna Karenina","Agarwal Publishers",823,2,1923));
+	System.out.println("sorted books are "+sortedbooks);
+	
+	
+	
+	   
 	}
 
 }
