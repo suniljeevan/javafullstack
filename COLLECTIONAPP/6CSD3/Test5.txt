@@ -28,7 +28,7 @@
 import java.util.*;
 //set of custom objects - not generic
 //POJO // Bean // Entity
-class Book {
+class Book implements Comparable<Book>{
 	private String bookid;
 	private String booktitle;
 	private double price;
@@ -98,7 +98,9 @@ class Book {
 		Book other = (Book) obj;
 		return Objects.equals(bookid, other.bookid) ;
 	}
-	
+	public int compareTo(Book second) {
+		return this.booktitle.compareTo(second.booktitle);
+	}
 	
 	
 }
@@ -107,12 +109,12 @@ class Book {
 public class TEST5 {
 	public static void main(String[] args) {
         
-		Set<Book> set = new HashSet<Book>();
+		TreeSet<Book> set = new TreeSet<Book>();
 		set.add(new Book("presiBook1","Life after death",1000,"Roli books",1992));
-		set.add(new Book("presiBook2","wht death?",100,"Penguin random house",1967));
+		set.add(new Book("presiBook2","Wht death?",100,"Penguin random house",1967));
 		set.add(new Book("presiBook3","Purpose of Death",105,"Rupa Publications",1802));
 		set.add(new Book("presiBook4","Me and my Death",50,"Arihant Books",2050));
-		set.add(new Book("presiBook5","me and my friends death",500,"Happer Collins",2049));
+		set.add(new Book("presiBook5","Me and my friends death",500,"Happer Collins",2049));
 		
 		//Displaying set as container of many integer objects
 		//insertion is not preserved
@@ -121,7 +123,7 @@ public class TEST5 {
         while(itr.hasNext()) {
         	System.out.println(itr.next());
         }
- //remove
+        //remove
        boolean res= set.remove(new Book("presiBook2","wht death?",100,"Penguin random house",1967));
         System.out.println(res);
         System.out.println("after reomoval:");
@@ -129,10 +131,36 @@ public class TEST5 {
         while(itr.hasNext()) {
         	System.out.println(itr.next());
         }
-
+        //search
+       res= set.contains( new Book("presiBook2","wht death?",100,"Penguin random house",1967));
+        System.out.println(res);
+        
+        //sort
+        //Set is not indexed, so Collection.sort(list) 
+        //is not applicable
+        System.out.println("after sorting:");
+        itr = set.iterator();
+        while(itr.hasNext()) {
+        	System.out.println(itr.next());
+        }
+        //TreeSet
+        Book e= new Book("presiBook3","Purpose of Death",105,"Rupa Publications",1802);
+        System.out.println(set.first());
+        System.out.println(set.last());
+        System.out.println("Ceiling :"+set.ceiling(e));
+        System.out.println("Floor :"+set.floor(e));
+        NavigableSet<Book> desSet = set.descendingSet();
+        itr = desSet.iterator();
+        while(itr.hasNext()) {
+        	System.out.println(itr.next());
+        }
+        
+        
 	}
 
 }
+
+
 
 
 
