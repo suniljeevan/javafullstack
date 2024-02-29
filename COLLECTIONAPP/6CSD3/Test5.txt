@@ -1,0 +1,130 @@
+//Set as generic
+		Set Gset = new HashSet();
+		Gset.add(10);
+		Gset.add("presidency");
+		Gset.add(13.08);
+		//displaying set as one object
+		//insertion order is not preserved 
+		System.out.println(Gset);
+
+
+
+//Set as specific
+		Set<Integer> set = new HashSet<Integer>();
+		set.add(10);
+		set.add(10);
+		set.add(10);
+		set.add(20);
+		set.add(20);
+		set.add(30);
+		//Displaying set as container of many integer objects
+		//insertion is not preserved
+		//duplicates are not allowed
+		for(Integer i:set) {
+			System.out.println(i);
+		}
+
+//demonstrate Set
+import java.util.*;
+//set of custom objects - not generic
+//POJO // Bean // Entity
+class Book {
+	private String bookid;
+	private String booktitle;
+	private double price;
+	private String publisher;
+	private int pubyear;
+//add getter setter 
+	public String getBookid() {
+		return bookid;
+	}
+	public void setBookid(String bookid) {
+		this.bookid = bookid;
+	}
+	public String getBooktitle() {
+		return booktitle;
+	}
+	public void setBooktitle(String booktitle) {
+		this.booktitle = booktitle;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public String getPublisher() {
+		return publisher;
+	}
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+	public int getPubyear() {
+		return pubyear;
+	}
+	public void setPubyear(int pubyear) {
+		this.pubyear = pubyear;
+	}
+	//add constructor
+	public Book(String bookid, String booktitle, double price, String publisher, int pubyear) {
+		super();
+		this.bookid = bookid;
+		this.booktitle = booktitle;
+		this.price = price;
+		this.publisher = publisher;
+		this.pubyear = pubyear;
+	}
+	public Book() {
+		super();
+	}
+	//add toString()
+	@Override
+	public String toString() {
+		return "Book [bookid=" + bookid + ", booktitle=" + booktitle + ", price=" + price + ", publisher=" + publisher
+				+ ", pubyear=" + pubyear + "]";
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(bookid, booktitle, price, publisher, pubyear);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Book other = (Book) obj;
+		return Objects.equals(bookid, other.bookid) ;
+	}
+	
+	
+	
+}
+
+
+public class TEST5 {
+	public static void main(String[] args) {
+        
+		Set<Book> set = new HashSet<Book>();
+		set.add(new Book("presiBook1","Life after death",1000,"Roli books",1992));
+		set.add(new Book("presiBook2","wht death?",100,"Penguin random house",1967));
+		set.add(new Book("presiBook3","Purpose of Death",105,"Rupa Publications",1802));
+		set.add(new Book("presiBook4","Me and my Death",50,"Arihant Books",2050));
+		set.add(new Book("presiBook5","me and my friends death",500,"Happer Collins",2049));
+		
+		//Displaying set as container of many integer objects
+		//insertion is not preserved
+		//duplicates are not allowed
+		Iterator itr = set.iterator();
+        while(itr.hasNext()) {
+        	System.out.println(itr.next());
+        }
+	}
+
+}
+
+
+
+
