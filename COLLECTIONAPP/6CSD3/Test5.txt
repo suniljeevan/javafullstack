@@ -121,6 +121,15 @@ public class TEST5 {
         while(itr.hasNext()) {
         	System.out.println(itr.next());
         }
+ //remove
+       boolean res= set.remove(new Book("presiBook2","wht death?",100,"Penguin random house",1967));
+        System.out.println(res);
+        System.out.println("after reomoval:");
+        itr = set.iterator();
+        while(itr.hasNext()) {
+        	System.out.println(itr.next());
+        }
+
 	}
 
 }
