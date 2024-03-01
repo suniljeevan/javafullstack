@@ -1,6 +1,9 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 // Implement the following scenario using collection
 /* Students of Section 8CSE1 are assigned with 5 subjects
@@ -13,23 +16,189 @@ import java.util.Map;
  find each students total mark in every subject
  find assigned faculty for every student
  find the details of faculty and their course. */
-class Student {
+class Stud {
 	private int id;
 	private String name;
 	private String address;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Stud(int id, String name, String address) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address = address;
+	}
+	public Stud() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Stud [id=" + id + ", name=" + name + ", address=" + address + "]";
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(address, id, name);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Stud other = (Stud) obj;
+		return Objects.equals(address, other.address) && id == other.id && Objects.equals(name, other.name);
+	}
+	
 }
 class Corse {
 	private String cid;
 	private String cname;
 	private String ctype;
 	private String domain;
+	public String getCid() {
+		return cid;
+	}
+	public void setCid(String cid) {
+		this.cid = cid;
+	}
+	public String getCname() {
+		return cname;
+	}
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+	public String getCtype() {
+		return ctype;
+	}
+	public void setCtype(String ctype) {
+		this.ctype = ctype;
+	}
+	public String getDomain() {
+		return domain;
+	}
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
+	public Corse(String cid, String cname, String ctype, String domain) {
+		super();
+		this.cid = cid;
+		this.cname = cname;
+		this.ctype = ctype;
+		this.domain = domain;
+	}
+	public Corse() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Corse [cid=" + cid + ", cname=" + cname + ", ctype=" + ctype + ", domain=" + domain + "]";
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(cid, cname, ctype, domain);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Corse other = (Corse) obj;
+		return Objects.equals(cid, other.cid) && Objects.equals(cname, other.cname)
+				&& Objects.equals(ctype, other.ctype) && Objects.equals(domain, other.domain);
+	}
+	
 }
 class Faculty {
 	private int empid;
 	private String fname;
 	private String qualification;
 	private String designation;
-	private List<Corse> courses; 
+	private List<Corse> courses;
+	public int getEmpid() {
+		return empid;
+	}
+	public void setEmpid(int empid) {
+		this.empid = empid;
+	}
+	public String getFname() {
+		return fname;
+	}
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	public String getQualification() {
+		return qualification;
+	}
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
+	public String getDesignation() {
+		return designation;
+	}
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+	public List<Corse> getCourses() {
+		return courses;
+	}
+	public void setCourses(List<Corse> courses) {
+		this.courses = courses;
+	}
+	public Faculty(int empid, String fname, String qualification, String designation, List<Corse> courses) {
+		super();
+		this.empid = empid;
+		this.fname = fname;
+		this.qualification = qualification;
+		this.designation = designation;
+		this.courses = courses;
+	}
+	public Faculty() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Faculty [empid=" + empid + ", fname=" + fname + ", qualification=" + qualification + ", designation="
+				+ designation + ", courses=" + courses + "]";
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(courses, designation, empid, fname, qualification);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Faculty other = (Faculty) obj;
+		return Objects.equals(courses, other.courses) && Objects.equals(designation, other.designation)
+				&& empid == other.empid && Objects.equals(fname, other.fname)
+				&& Objects.equals(qualification, other.qualification);
+	}
+	
 }
 class Subject {
 	private String subjectCode;
@@ -37,12 +206,120 @@ class Subject {
 	private int credit;
 	private int marks[];
 	private List<Faculty> faculties;
+	public String getSubjectCode() {
+		return subjectCode;
+	}
+	public void setSubjectCode(String subjectCode) {
+		this.subjectCode = subjectCode;
+	}
+	public String getSubjectName() {
+		return subjectName;
+	}
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+	public int getCredit() {
+		return credit;
+	}
+	public void setCredit(int credit) {
+		this.credit = credit;
+	}
+	public int[] getMarks() {
+		return marks;
+	}
+	public void setMarks(int[] marks) {
+		this.marks = marks;
+	}
+	public List<Faculty> getFaculties() {
+		return faculties;
+	}
+	public void setFaculties(List<Faculty> faculties) {
+		this.faculties = faculties;
+	}
+	public Subject(String subjectCode, String subjectName, int credit, int[] marks, List<Faculty> faculties) {
+		super();
+		this.subjectCode = subjectCode;
+		this.subjectName = subjectName;
+		this.credit = credit;
+		this.marks = marks;
+		this.faculties = faculties;
+	}
+	public Subject() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Subject [subjectCode=" + subjectCode + ", subjectName=" + subjectName + ", credit=" + credit
+				+ ", marks=" + Arrays.toString(marks) + ", faculties=" + faculties + "]";
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(marks);
+		result = prime * result + Objects.hash(credit, faculties, subjectCode, subjectName);
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Subject other = (Subject) obj;
+		return credit == other.credit && Objects.equals(faculties, other.faculties) && Arrays.equals(marks, other.marks)
+				&& Objects.equals(subjectCode, other.subjectCode) && Objects.equals(subjectName, other.subjectName);
+	}
+	
 }
 
 
 public class Test11 {
 	public static void main(String[] args) {
-      Map<Student, List<Subject>> table=new HashMap<Student,List<Subject>>();
+      Map<Stud, List<Subject>> table=new HashMap<Stud,List<Subject>>();
+      List<Corse> courses1=new ArrayList<Corse>();
+      courses1.add(new Corse("CSE1001","Problem solving in java","integrated","coding"));
+      courses1.add(new Corse("CSE1002","Problem solving in java","integrated","coding"));
+      courses1.add(new Corse("CSE1003","Problem solving in java","integrated","coding"));
+      List<Corse> courses2=new ArrayList<Corse>();
+      courses2.add(new Corse("CSE1004","Problem solving in java","integrated","coding"));
+      courses2.add(new Corse("CSE1005","Problem solving in java","integrated","coding"));
+      courses2.add(new Corse("CSE1006","Problem solving in java","integrated","coding"));
+      List<Corse> courses3=new ArrayList<Corse>();
+      courses3.add(new Corse("CSE1007","Problem solving in java","integrated","coding"));
+      courses3.add(new Corse("CSE1008","Problem solving in java","integrated","coding"));
+      courses3.add(new Corse("CSE1009","Problem solving in java","integrated","coding"));
+      List<Corse> courses4=new ArrayList<Corse>();
+      courses4.add(new Corse("CSE1010","Problem solving in java","integrated","coding"));
+      courses4.add(new Corse("CSE1011","Problem solving in java","integrated","coding"));
+      courses4.add(new Corse("CSE1012","Problem solving in java","integrated","coding"));
+      List<Corse> courses5=new ArrayList<Corse>();
+      courses5.add(new Corse("CSE1013","Problem solving in java","integrated","coding"));
+      courses5.add(new Corse("CSE1014","Problem solving in java","integrated","coding"));
+      courses5.add(new Corse("CSE1015","Problem solving in java","integrated","coding"));
+      List<Corse> courses6=new ArrayList<Corse>();
+      courses6.add(new Corse("CSE1016","Problem solving in java","integrated","coding"));
+      courses6.add(new Corse("CSE1017","Problem solving in java","integrated","coding"));
+      courses6.add(new Corse("CSE1018","Problem solving in java","integrated","coding"));
+      List<Corse> courses7=new ArrayList<Corse>();
+      courses7.add(new Corse("CSE1019","Problem solving in java","integrated","coding"));
+      courses7.add(new Corse("CSE1020","Problem solving in java","integrated","coding"));
+      List<Faculty> faculties=new ArrayList<Faculty>();
+      faculties.add(new Faculty(100,"Dr. Sandeep","PHD","Associate Professor",courses1));
+      faculties.add(new Faculty(101,"Dr. Sandeep","PHD","Associate Professor",courses2));
+      faculties.add(new Faculty(102,"Dr. Sandeep","PHD","Associate Professor",courses1));
+      faculties.add(new Faculty(103,"Dr. Sandeep","PHD","Associate Professor",courses2));
+      faculties.add(new Faculty(104,"Dr. Sandeep","PHD","Associate Professor",courses3));
+      faculties.add(new Faculty(105,"Dr. Sandeep","PHD","Associate Professor",courses4));
+      faculties.add(new Faculty(106,"Dr. Sandeep","PHD","Associate Professor",courses2));
+      faculties.add(new Faculty(107,"Dr. Sandeep","PHD","Associate Professor",courses5));
+      faculties.add(new Faculty(108,"Dr. Sandeep","PHD","Associate Professor",courses6));
+      faculties.add(new Faculty(109,"Dr. Sandeep","PHD","Associate Professor",courses7));
+      List<Subject> subjects=new ArrayList<Subject>();
+      int m[]= {12,45,50};
+      subjects.add(new Subject("1001","java",3,m,faculties));
 	}
 
 }
