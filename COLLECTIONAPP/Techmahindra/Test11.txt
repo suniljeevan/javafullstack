@@ -1,0 +1,52 @@
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+// Implement the following scenario using collection
+/* Students of Section 8CSE1 are assigned with 5 subjects
+ Each subject is alloted to more than one faculty.
+ Each faculty is also assigned to other courses
+ for other sections.
+ Each subject have 3 different assessment for 
+ evaluation.
+
+ find each students total mark in every subject
+ find assigned faculty for every student
+ find the details of faculty and their course. */
+class Student {
+	private int id;
+	private String name;
+	private String address;
+}
+class Corse {
+	private String cid;
+	private String cname;
+	private String ctype;
+	private String domain;
+}
+class Faculty {
+	private int empid;
+	private String fname;
+	private String qualification;
+	private String designation;
+	private List<Corse> courses; 
+}
+class Subject {
+	private String subjectCode;
+	private String subjectName;
+	private int credit;
+	private int marks[];
+	private List<Faculty> faculties;
+}
+
+
+public class Test11 {
+	public static void main(String[] args) {
+      Map<Student, List<Subject>> table=new HashMap<Student,List<Subject>>();
+	}
+
+}
+
+
+
+
