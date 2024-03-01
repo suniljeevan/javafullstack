@@ -1,0 +1,61 @@
+//Map
+import java.util.*;
+public class Test10 {
+	public static void main(String[] args) {
+           // creating a map of id and name
+	//table of entries - id and name
+	Map<Integer,String>	 oldtable=new HashMap<Integer,String>();	
+	Map<Integer,String>	 table=new HashMap<Integer,String>();
+	oldtable.put(101, "sunny");
+	oldtable.put(102, "sunny");
+	oldtable.put(103, "sunny");
+	oldtable.put(104, "sunny");
+	//displaying entries
+	for(Map.Entry<Integer,String> e:oldtable.entrySet()) {
+		System.out.println(e.getKey()+"->"+e.getValue());
+	}
+	table.putAll(oldtable);
+	table.put(102, "ronny");
+	table.putIfAbsent(102, "money");
+	table.putIfAbsent(107, "johny");
+	//displaying entries
+	//insertion order is not preserved
+	System.out.println("from new table");
+	for(Map.Entry<Integer,String> e:table.entrySet()) {
+		System.out.println(e.getKey()+"->"+e.getValue());
+	}
+//displaying all keys	
+	// keys are stored in the form of a Set
+	Set<Integer> keys=table.keySet();
+	//order not preserved
+	System.out.println("available keys "+keys);
+	//displaying all the values
+	Collection<String> values=table.values();
+	System.out.println("available values "+values);
+	//finding a value for a key
+	String v=table.get(101);
+	System.out.println("value for 101 is "+v);
+	v=table.getOrDefault(108, "tonny");
+	System.out.println("value for 108 is "+v);
+	table.remove(108);
+	keys=table.keySet();
+	//order not preserved
+	System.out.println("available keys "+keys);
+	table.replace(101, "kumar");
+	v=table.get(101);
+	System.out.println("value for 101 is "+v);
+	table.compute(101, (key, val) 
+            -> val.concat(" Singh")); 
+	v=table.get(101);
+	System.out.println("value for 101 is "+v);
+    table.computeIfPresent(102,(key,value)
+    		->value.concat(" Sahoo") );
+    v=table.get(102);
+	System.out.println("value for 102 is "+v);
+	}
+
+}
+
+
+
+
