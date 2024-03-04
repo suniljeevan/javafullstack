@@ -84,7 +84,7 @@ public class Test5 {
       productList2.add(new Product("pres101","Java Complete Reference","book",700));
       productList2.add(new Product("pres1101","water bottles","Acessories",700));
       productList2.add(new Product("pres1230","Jeans","Clothes",3000));
-      productList2.add(new Product("pres1199","Jpres1199","Iphone",150000));
+      productList2.add(new Product("pres1199","Ihone","Electronic",150000));
       productList2.add(new Product("pres101","Java Complete Reference","book",700));
       List<Product> productList3 = new ArrayList<Product>();
       productList3.add(new Product("pres230","Sotalol","medicine",200));
@@ -97,7 +97,17 @@ public class Test5 {
       table.put("PUNIV00448", productList3);
       table.put("PUNIV01690", productList1);
       table.put("PUNIV00123", productList2);
-      //
+      //Display the details of table
+      for(Map.Entry<String,List<Product>> e:table.entrySet()) {
+    	  System.out.println(e.getKey()+"->"+e.getValue());
+      }
+      //Display the details by name of products
+      for(Map.Entry<String,List<Product>> e:table.entrySet()) {
+    	  System.out.print(e.getKey()+"->");
+          e.getValue().stream().forEach(x->
+          System.out.print(x.getProdName()+","));
+          System.out.println();
+      } 
       		
 	}
 
