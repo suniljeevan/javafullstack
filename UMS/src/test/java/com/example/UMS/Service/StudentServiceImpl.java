@@ -50,7 +50,7 @@ public class StudentServiceImpl implements StudentService {
 		Map<Student, List<Subject>> studentSubjectMap = studentsWithSubjects.stream()
                 .collect(Collectors.toMap(
                         student -> student,
-                        student -> student.getSubjects()));
+                        student -> student.get
         
         return studentSubjectMap;
     }
