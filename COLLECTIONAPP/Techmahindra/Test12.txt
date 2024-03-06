@@ -1,0 +1,124 @@
+/* for section 8CSE students are alloted with 6 subjects
+ implement database 8CSE to keep the above information
+ permanently*/
+// MANY-MANY requires 3 tables : 2 for entities 1 for relationship
+
+package JDBC;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+class Student {
+	private int id;
+	private String name;
+	private String address;
+	private Set<Subject> subjects;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Student(int id, String name, String address) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address = address;
+	}
+	public Student() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Stud [id=" + id + ", name=" + name + ", address=" + address + "]";
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(address, id, name);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		return Objects.equals(address, other.address) && id == other.id && Objects.equals(name, other.name);
+	}
+	
+}
+class Subject {
+	private String subjectCode;
+	private String subjectName;
+	private int credit;
+	public String getSubjectCode() {
+		return subjectCode;
+	}
+	public void setSubjectCode(String subjectCode) {
+		this.subjectCode = subjectCode;
+	}
+	public String getSubjectName() {
+		return subjectName;
+	}
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+	public int getCredit() {
+		return credit;
+	}
+	public void setCredit(int credit) {
+		this.credit = credit;
+	}
+	public Subject(String subjectCode, String subjectName, int credit) {
+		super();
+		this.subjectCode = subjectCode;
+		this.subjectName = subjectName;
+		this.credit = credit;
+	}
+	public Subject() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Subject [subjectCode=" + subjectCode + ", subjectName=" + subjectName + ", credit=" + credit + "]";
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(credit, subjectCode, subjectName);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Subject other = (Subject) obj;
+		return credit == other.credit && Objects.equals(subjectCode, other.subjectCode)
+				&& Objects.equals(subjectName, other.subjectName);
+	}
+	
+}
+public class Test12 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

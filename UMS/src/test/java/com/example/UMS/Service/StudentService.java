@@ -15,7 +15,7 @@ public interface StudentService {
 	public Student getAStudent(int id);
 	public double getTotalMarksForASubject(String subjectcode);
 	public Map<String, Integer> getTotalMarksForAllSubject();
-	public Map<Integer, Double> getAllStudentsTotalMarksForAllSubjects();
+	public Map<Integer,List<Double>> getAllStudentsTotalMarksForAllSubjects();
 	public Map<Student, List<Subject>> getAllStudentsWithSubjects();
 	public List<Faculty> getAllFacultyName();
 	public List<Subject> getAllSubject();

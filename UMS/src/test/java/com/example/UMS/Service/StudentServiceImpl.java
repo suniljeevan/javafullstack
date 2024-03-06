@@ -1,13 +1,16 @@
 package com.example.UMS.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.UMS.Entity.Course;
 import com.example.UMS.Entity.Faculty;
@@ -15,6 +18,8 @@ import com.example.UMS.Entity.Student;
 import com.example.UMS.Entity.Subject;
 import com.example.UMS.Exception.NotFoundException;
 import com.example.UMS.Repository.StudentRepository;
+
+
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -42,19 +47,32 @@ public class StudentServiceImpl implements StudentService {
 		double totalmarks=subjectservice.getTotalMarksForASubject(subjectcode);
 		return totalmarks;
 	}
+	@Transactional(readOnly = true)
 	public Map<String, Integer> getTotalMarksForAllSubject() {
 		return null;
 	}
-	public Map<Integer, Double> getAllStudentsTotalMarksForAllSubjects(){
+	@Transactional(readOnly = true)
+	public Map<Integer,List<Double>> getAllStudentsTotalMarksForAllSubjects(){
 		List<Student> studentsWithSubjects=studentrepository.findAllWithSubjects();
-		Map<Student, List<Subject>> studentSubjectMap = studentsWithSubjects.stream()
-                .collect(Collectors.toMap(
-                        student -> student,
-                        student -> student.get
+		Map<Student, Set<Subject>> studentSubjectMap = studentsWithSubjects.stream()
+                .collect(Collectors.toMap(student->student, Student::getSubjects));
+        Map<Integer,List<Double>> eachsubjecttotalmarks = new HashMap<>();
+        for(Map.Entry<Student,Set<Subject>> e:studentSubjectMap.entrySet()) {
+        	Student student=e.getKey();
+        	Set<Subject> subjects=e.getValue();
+        	List<Double> totalmarklists=new ArrayList<Double>();
+        	for(Subject subject:subjects ) {
+        		double totalmarks=subject.getMark().stream().mapToDouble(x->x.getMarks())
+        				.reduce(0, (total,y)->total+y);
+        		totalmarklists.add(totalmarks);
+        		
+        	}
+        	eachsubjecttotalmarks.put(student.getId(), totalmarklists);
+        }
         
-        return studentSubjectMap;
+        return eachsubjecttotalmarks;
     }
-	}
+	
 	public List<Faculty> getAllFacultyName(){
 		return null;
 	}
