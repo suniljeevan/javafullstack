@@ -4,6 +4,9 @@
 // MANY-MANY requires 3 tables : 2 for entities 1 for relationship
 
 package JDBC;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -114,6 +117,75 @@ class Subject {
 	}
 	
 }
+interface StudentDAO {
+	public boolean createConnection()throws Exception ;
+	public int insertStudent(Student s);
+	public int updateStudent(int sid);
+	public int deleteStudent(int sid);
+	public List<Student> fetchAllStudent();
+	public Student fetchAStudent(int sid);
+}
+interface SubjectDAO {
+	public boolean createConnection()throws Exception ;
+	public int insertSubject(Subject s);
+	public int updateSubject(String scode);
+	public int deleteSubject(String scode);
+	public List<Subject> fetchAllSubject();
+	public Subject fetchASubject(String scode);
+}
+class StudentDAOImpl implements StudentDAO {
+	private static StudentDAOImpl ob=null;
+	private Connection contostudent=null;
+	private StudentDAOImpl() {}
+	public static StudentDAOImpl returnInstance() {
+		if(ob==null)
+			ob=new StudentDAOImpl();
+		return ob;
+	}
+	public boolean createConnection()throws Exception {
+		contostudent=DriverManager.getConnection(
+	       "jdbc:mysql://localhost:3306/8CSE","root","sunil");
+		Class.forName("com.mysql.jdbc.Driver");
+		if(contostudent!=null)
+			return true;
+		else
+			return false; 
+	}
+	public int insertStudent(Student s) {
+		int response=0;
+		try {
+		PreparedStatement ps=contostudent.prepareStatement(
+				"insert into student values(?,?,?)");
+		ps.setInt(1, s.getId());
+		ps.setString(2, s.getName());
+		ps.setString(3, s.getAddress());
+		response=ps.executeUpdate();
+		}catch(Exception e) {}
+		return response;
+	}
+	public int updateStudent(int sid) {
+		int response=0;
+		try {
+		PreparedStatement ps=contostudent.prepareStatement(
+				"update student set name=?,address=? where id=? ");
+		ps.setString(1, "sanju");
+		ps.setString(2, "bangalore");
+		ps.setInt(3, sid);
+		response=ps.executeUpdate();
+		}catch(Exception e) {}
+		return response;
+	}
+	public int deleteStudent(int sid) {
+		return 0;
+	}
+	public List<Student> fetchAllStudent(){
+		return null;
+	}
+	public Student fetchAStudent(int sid) {
+		return null;
+	}
+}
+
 public class Test12 {
 
 	public static void main(String[] args) {
@@ -122,3 +194,8 @@ public class Test12 {
 	}
 
 }
+
+
+
+
+
