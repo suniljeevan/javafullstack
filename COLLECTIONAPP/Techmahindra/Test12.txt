@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -33,6 +34,13 @@ class Student {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	public Set<Subject> getSubjects() {
+		return subjects;
+	}
+	public void setSubjects(Set<Subject> subjects) {
+		this.subjects = subjects;
 	}
 	public Student(int id, String name, String address) {
 		super();
@@ -135,7 +143,7 @@ interface SubjectDAO {
 }
 class StudentDAOImpl implements StudentDAO {
 	private static StudentDAOImpl ob=null;
-	private Connection contostudent=null;
+	private Connection contodb=null;
 	private StudentDAOImpl() {}
 	public static StudentDAOImpl returnInstance() {
 		if(ob==null)
@@ -143,30 +151,38 @@ class StudentDAOImpl implements StudentDAO {
 		return ob;
 	}
 	public boolean createConnection()throws Exception {
-		contostudent=DriverManager.getConnection(
+		contodb=DriverManager.getConnection(
 	       "jdbc:mysql://localhost:3306/8CSE","root","sunil");
 		Class.forName("com.mysql.jdbc.Driver");
-		if(contostudent!=null)
+		if(contodb!=null)
 			return true;
 		else
 			return false; 
 	}
 	public int insertStudent(Student s) {
-		int response=0;
+		int response=0,response2=0;
 		try {
-		PreparedStatement ps=contostudent.prepareStatement(
+		PreparedStatement ps=contodb.prepareStatement(
 				"insert into student values(?,?,?)");
+		PreparedStatement ps2=contodb.prepareStatement(
+				"insert into enrollment values(?,?)");
 		ps.setInt(1, s.getId());
 		ps.setString(2, s.getName());
 		ps.setString(3, s.getAddress());
 		response=ps.executeUpdate();
+		ps2.setInt(1, s.getId());
+		Set<Subject> subjects=s.getSubjects();
+	    for(Subject sub:subjects) {
+	    	ps2.setString(2, sub.getSubjectCode());
+	    	response2=ps2.executeUpdate();
+	    }
 		}catch(Exception e) {}
 		return response;
 	}
 	public int updateStudent(int sid) {
 		int response=0;
 		try {
-		PreparedStatement ps=contostudent.prepareStatement(
+		PreparedStatement ps=contodb.prepareStatement(
 				"update student set name=?,address=? where id=? ");
 		ps.setString(1, "sanju");
 		ps.setString(2, "bangalore");
@@ -187,10 +203,28 @@ class StudentDAOImpl implements StudentDAO {
 }
 
 public class Test12 {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public static void main(String[] args) throws Exception{
+		StudentDAOImpl ds=	StudentDAOImpl.returnInstance();
+		boolean res=ds.createConnection();
+		if(res==true) {
+			Student s=new Student();
+			s.setId(100);
+			s.setName("sunny");
+			s.setAddress("bangalore");
+			Set<Subject> subjects=new HashSet<Subject>();
+			subjects.add(new Subject("cse3001","java",3));
+			subjects.add(new Subject("cse3002","python",3));
+			subjects.add(new Subject("cse3003","c#",3));
+			subjects.add(new Subject("cse3004","java adv",3));
+			subjects.add(new Subject("cse3005","java fullstack",3));
+			subjects.add(new Subject("cse3006","android",3));
+			s.setSubjects(subjects);
+			int r=ds.insertStudent(s);
+			if(r==1)
+				System.out.println("student inserted");
+			else
+				System.out.println("error in insertion");
+		}
 	}
 
 }
