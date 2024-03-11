@@ -1,7 +1,11 @@
 package JDBC;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.List;
 import java.util.Objects;
+
+import java.sql.*;
 
 /*there are students from section 6cse5 , each students have
 atleast 2 addresses , create a database to manage student 
@@ -145,6 +149,7 @@ interface StudentDAO {
 	public Student fetchAStudent(int id);
 }
 class StudentDAOImpl implements StudentDAO {
+	private Connection cts=null;
 	public static StudentDAOImpl ob=null;
 	public static StudentDAOImpl createObject() {
 		if(ob==null) 
@@ -153,13 +158,26 @@ class StudentDAOImpl implements StudentDAO {
 	}
 	private StudentDAOImpl() {}
 	public boolean create(String dbn,String user,String pwd) {
+		boolean result=false;
+		try {
+			cts=DriverManager.getConnection(
+			"jdbc:mysql://localhost:3306/"+	dbn,"root","sunil");
+		Class.forName("com.mysql.jdbc.Driver");	
+		Statement st=cts.createStatement();
+		 result=st.execute(
+			"create table student(id int primary key, name varchar(30), cgpa double)");
+		
+		}catch(Exception e) {}
+		if(result==true)
 		return true;
+		else return false;
 	}
 	public int insertStudent(Student s) {
 		return 1;
 	}
 	public int updateStudent(int id, Student s) {
 		return 1;
+		
 	}
 	public int deleteStudent(int id) {
 		return 1;
