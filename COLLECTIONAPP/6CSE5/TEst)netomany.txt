@@ -167,10 +167,15 @@ class StudentDAOImpl implements StudentDAO {
 		 result=st.execute(
 			"create table student(id int primary key, name varchar(30), cgpa double)");
 		
-		}catch(Exception e) {}
-		if(result==true)
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		if(result==true) {
 		return true;
-		else return false;
+		}
+		else { 
+			return false;
+		}
 	}
 	public int insertStudent(Student s) {
 		return 1;
@@ -224,11 +229,14 @@ class AddressDAOImpl implements AddressDAO {
 		return null;
 	}
 }
+
+
 public class TESTONETOMANY {
-
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+      StudentDAOImpl ob=StudentDAOImpl.createObject();
+      boolean res=ob.create("6cse5", "root", "sunil");
+      System.out.println("Table created Sucessfully");
+      
 	}
 
 }
