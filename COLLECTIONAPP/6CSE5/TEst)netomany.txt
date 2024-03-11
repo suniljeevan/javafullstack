@@ -164,6 +164,34 @@ class StudentDAOImpl implements StudentDAO {
 		return null;
 	}
 }
+interface AddressDAO {
+	public boolean create(String dbn,String user,String pwd);
+	public int insertAddress(Address s);
+	public int updateAddress(String hn, Address s);
+	public int deleteAddress(String hn);
+	public List<Address> fetchAllAddresses();
+	public Address fetchAAddress(String hn);
+}
+class AddressDAOImpl implements AddressDAO {
+	public boolean create(String dbn,String user,String pwd) {
+		return true;
+	}
+	public int insertAddress(Address s) {
+		return 1;
+	}
+	public int updateAddress(String hn, Address s) {
+		return 1;
+	}
+	public int deleteAddress(String hn) {
+		return 1;
+	}
+	public List<Address> fetchAllAddresses(){
+		return null;
+	}
+	public Address fetchAAddress(String hn) {
+		return null;
+	}
+}
 public class TESTONETOMANY {
 
 	public static void main(String[] args) {
