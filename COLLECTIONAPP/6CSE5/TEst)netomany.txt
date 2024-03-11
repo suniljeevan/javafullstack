@@ -161,7 +161,7 @@ class StudentDAOImpl implements StudentDAO {
 		boolean result=false;
 		try {
 			cts=DriverManager.getConnection(
-			"jdbc:mysql://localhost:3306/"+	dbn,"root","sunil");
+			"jdbc:mysql://localhost:3306/"+	dbn,user,pwd);
 		Class.forName("com.mysql.jdbc.Driver");	
 		Statement st=cts.createStatement();
 		 result=st.execute(
@@ -204,6 +204,7 @@ interface AddressDAO {
 }
 class AddressDAOImpl implements AddressDAO {
 	public static AddressDAOImpl ob=null;
+	private Connection cta=null;
 	public static AddressDAOImpl createObject() {
 		if(ob==null) 
 			ob=new AddressDAOImpl();
@@ -211,7 +212,24 @@ class AddressDAOImpl implements AddressDAO {
 	}
 	private AddressDAOImpl() {}
 	public boolean create(String dbn,String user,String pwd) {
+		boolean result=false;
+		try {
+			cta=DriverManager.getConnection(
+			"jdbc:mysql://localhost:3306/"+	dbn,user,pwd);
+		Class.forName("com.mysql.jdbc.Driver");	
+		Statement st=cta.createStatement();
+		String query="create table address(HouseNumber varchar(30) primary key, postofc varchar(10), district varchar(10), state varchar(10), pin int, mobilenumber varchar(13),sid int, foreign key(sid) references student(id))";
+		 result=st.execute(query);
+		
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		if(result==true) {
 		return true;
+		}
+		else { 
+			return false;
+		}
 	}
 	public int insertAddress(Address s) {
 		return 1;
@@ -235,7 +253,10 @@ public class TESTONETOMANY {
 	public static void main(String[] args) {
       StudentDAOImpl ob=StudentDAOImpl.createObject();
       boolean res=ob.create("6cse5", "root", "sunil");
-      System.out.println("Table created Sucessfully");
+      System.out.println("Table student created Sucessfully");
+      AddressDAOImpl obb=AddressDAOImpl.createObject();
+       res=obb.create("6cse5", "root", "sunil");
+      System.out.println("Table address created Sucessfully");
       
 	}
 
