@@ -145,6 +145,13 @@ interface StudentDAO {
 	public Student fetchAStudent(int id);
 }
 class StudentDAOImpl implements StudentDAO {
+	public static StudentDAOImpl ob=null;
+	public static StudentDAOImpl createObject() {
+		if(ob==null) 
+			ob=new StudentDAOImpl();
+		return ob;
+	}
+	private StudentDAOImpl() {}
 	public boolean create(String dbn,String user,String pwd) {
 		return true;
 	}
@@ -173,6 +180,13 @@ interface AddressDAO {
 	public Address fetchAAddress(String hn);
 }
 class AddressDAOImpl implements AddressDAO {
+	public static AddressDAOImpl ob=null;
+	public static AddressDAOImpl createObject() {
+		if(ob==null) 
+			ob=new AddressDAOImpl();
+		return ob;
+	}
+	private AddressDAOImpl() {}
 	public boolean create(String dbn,String user,String pwd) {
 		return true;
 	}
