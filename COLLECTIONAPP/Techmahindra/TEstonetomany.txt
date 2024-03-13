@@ -164,8 +164,7 @@ class StudentDAOImpl implements StudentDAO {
 			"jdbc:mysql://localhost:3306/"+	dbn,user,pwd);
 		Class.forName("com.mysql.jdbc.Driver");	
 		Statement st=cts.createStatement();
-		 result=st.execute(
-			"create table student(id int primary key, name varchar(30), cgpa double)");
+		 //result=st.execute("create table student(id int primary key, name varchar(30), cgpa double)");
 		
 		}catch(Exception e) {
 			System.out.println(e);
@@ -178,7 +177,16 @@ class StudentDAOImpl implements StudentDAO {
 		}
 	}
 	public int insertStudent(Student s) {
-		return 1;
+		int res=0;
+		try {
+		PreparedStatement p=
+			cts.prepareStatement("insert into student values(?,?,?)");
+		p.setInt(1,s.getId());
+		p.setString(2, s.getName());
+		p.setDouble(3, s.getCgpa());
+		res=p.executeUpdate();
+		}catch(Exception e) {}
+		return res;
 	}
 	public int updateStudent(int id, Student s) {
 		return 1;
@@ -218,8 +226,8 @@ class AddressDAOImpl implements AddressDAO {
 			"jdbc:mysql://localhost:3306/"+	dbn,user,pwd);
 		Class.forName("com.mysql.jdbc.Driver");	
 		Statement st=cta.createStatement();
-		String query="create table address(HouseNumber varchar(30) primary key, postofc varchar(10), district varchar(10), state varchar(10), pin int, mobilenumber varchar(13),sid int, foreign key(sid) references student(id))";
-		 result=st.execute(query);
+		//String query="create table address(HouseNumber varchar(30) primary key, postofc varchar(10), district varchar(10), state varchar(10), pin int, mobilenumber varchar(13),sid int, foreign key(sid) references student(id))";
+		 //result=st.execute(query);
 		
 		}catch(Exception e) {
 			System.out.println(e);
@@ -232,7 +240,18 @@ class AddressDAOImpl implements AddressDAO {
 		}
 	}
 	public int insertAddress(Address s) {
-		return 1;
+		int res=0;
+		try {
+		PreparedStatement p=
+			cta.prepareStatement("insert into Address(HouseNumber,district,pin) values(?,?,?)");
+		p.setString(1,s.getHouseNumber());
+		p.setString(2, s.getDistrict());
+		p.setInt(3, s.getPin());
+		res=p.executeUpdate();
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return res;
 	}
 	public int updateAddress(String hn, Address s) {
 		return 1;
@@ -253,15 +272,23 @@ public class TESTONETOMANY {
 	public static void main(String[] args) {
       StudentDAOImpl ob=StudentDAOImpl.createObject();
       boolean res=ob.create("8cse2", "root", "sunil");
-      System.out.println("Table student created Sucessfully");
+      Student s= new Student(101,"amith",8.9);
+      ob.insertStudent(s);
+      System.out.println("Student inserted");
+      //System.out.println("Table student created Sucessfully");
       AddressDAOImpl obb=AddressDAOImpl.createObject();
-       res=obb.create("8cse2", "root", "root");
-      System.out.println("Table address created Sucessfully");
+       res=obb.create("8cse2", "root", "sunil");
+      //System.out.println("Table address created Sucessfully");
+      Address a= new Address();
+      a.setHouseNumber("H1001");
+      a.setPin(561203);
+      a.setDistrict("Hebbal");
+     obb.insertAddress(a);
+      System.out.println("Address inserted");
       
 	}
 
 }
-
 
 
 
