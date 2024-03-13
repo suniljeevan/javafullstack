@@ -1,4 +1,4 @@
-package JDBC;
+package JDBC2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -252,10 +252,10 @@ class AddressDAOImpl implements AddressDAO {
 public class TESTONETOMANY {
 	public static void main(String[] args) {
       StudentDAOImpl ob=StudentDAOImpl.createObject();
-      boolean res=ob.create("6cse5", "root", "sunil");
+      boolean res=ob.create("8cse2", "root", "sunil");
       System.out.println("Table student created Sucessfully");
       AddressDAOImpl obb=AddressDAOImpl.createObject();
-       res=obb.create("8cse", "root", "root");
+       res=obb.create("8cse2", "root", "root");
       System.out.println("Table address created Sucessfully");
       
 	}
