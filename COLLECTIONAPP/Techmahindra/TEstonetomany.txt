@@ -1,0 +1,267 @@
+package JDBC;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.List;
+import java.util.Objects;
+
+import java.sql.*;
+
+/*there are students from section 6cse5 , each students have
+atleast 2 addresses , create a database to manage student 
+address information in MYSQL
+*/
+//create POJO for student and address
+class Student {
+private int id;
+private String name;
+private double cgpa;
+// alt shift s
+public int getId() {
+	return id;
+}
+public void setId(int id) {
+	this.id = id;
+}
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
+public double getCgpa() {
+	return cgpa;
+}
+public void setCgpa(double cgpa) {
+	this.cgpa = cgpa;
+}
+public Student(int id, String name, double cgpa) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.cgpa = cgpa;
+}
+public Student() {
+	super();
+}
+@Override
+public String toString() {
+	return "Student [id=" + id + ", name=" + name + ", cgpa=" + cgpa + "]";
+}
+
+}
+class Address {
+	private String HouseNumber;
+	private String postOffice;
+	private String district;
+	private String state;
+	private int pin;
+	private String mobileNumber;
+	private int sid;
+	public String getHouseNumber() {
+		return HouseNumber;
+	}
+	public void setHouseNumber(String houseNumber) {
+		HouseNumber = houseNumber;
+	}
+	public String getPostOffice() {
+		return postOffice;
+	}
+	public void setPostOffice(String postOffice) {
+		this.postOffice = postOffice;
+	}
+	public String getDistrict() {
+		return district;
+	}
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public int getPin() {
+		return pin;
+	}
+	public void setPin(int pin) {
+		this.pin = pin;
+	}
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+	public int getSid() {
+		return sid;
+	}
+	public void setSid(int sid) {
+		this.sid = sid;
+	}
+	public Address(String houseNumber, String postOffice, String district, String state, int pin, String mobileNumber,
+			int sid) {
+		super();
+		HouseNumber = houseNumber;
+		this.postOffice = postOffice;
+		this.district = district;
+		this.state = state;
+		this.pin = pin;
+		this.mobileNumber = mobileNumber;
+		this.sid = sid;
+	}
+	public Address() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Address [HouseNumber=" + HouseNumber + ", postOffice=" + postOffice + ", district=" + district
+				+ ", state=" + state + ", pin=" + pin + ", mobileNumber=" + mobileNumber + ", sid=" + sid + "]";
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(HouseNumber, district, mobileNumber, pin, postOffice, sid, state);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Address other = (Address) obj;
+		return Objects.equals(HouseNumber, other.HouseNumber) && Objects.equals(district, other.district)
+				&& Objects.equals(mobileNumber, other.mobileNumber) && pin == other.pin
+				&& Objects.equals(postOffice, other.postOffice) && sid == other.sid
+				&& Objects.equals(state, other.state);
+	}
+	
+}
+//create a datasource object-singleton
+interface StudentDAO {
+	public boolean create(String dbn,String user,String pwd);
+	public int insertStudent(Student s);
+	public int updateStudent(int id, Student s);
+	public int deleteStudent(int id);
+	public List<Student> fetchAllStudents();
+	public Student fetchAStudent(int id);
+}
+class StudentDAOImpl implements StudentDAO {
+	private Connection cts=null;
+	public static StudentDAOImpl ob=null;
+	public static StudentDAOImpl createObject() {
+		if(ob==null) 
+			ob=new StudentDAOImpl();
+		return ob;
+	}
+	private StudentDAOImpl() {}
+	public boolean create(String dbn,String user,String pwd) {
+		boolean result=false;
+		try {
+			cts=DriverManager.getConnection(
+			"jdbc:mysql://localhost:3306/"+	dbn,user,pwd);
+		Class.forName("com.mysql.jdbc.Driver");	
+		Statement st=cts.createStatement();
+		 result=st.execute(
+			"create table student(id int primary key, name varchar(30), cgpa double)");
+		
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		if(result==true) {
+		return true;
+		}
+		else { 
+			return false;
+		}
+	}
+	public int insertStudent(Student s) {
+		return 1;
+	}
+	public int updateStudent(int id, Student s) {
+		return 1;
+		
+	}
+	public int deleteStudent(int id) {
+		return 1;
+	}
+	public List<Student> fetchAllStudents(){
+		return null;
+	}
+	public Student fetchAStudent(int id) {
+		return null;
+	}
+}
+interface AddressDAO {
+	public boolean create(String dbn,String user,String pwd);
+	public int insertAddress(Address s);
+	public int updateAddress(String hn, Address s);
+	public int deleteAddress(String hn);
+	public List<Address> fetchAllAddresses();
+	public Address fetchAAddress(String hn);
+}
+class AddressDAOImpl implements AddressDAO {
+	public static AddressDAOImpl ob=null;
+	private Connection cta=null;
+	public static AddressDAOImpl createObject() {
+		if(ob==null) 
+			ob=new AddressDAOImpl();
+		return ob;
+	}
+	private AddressDAOImpl() {}
+	public boolean create(String dbn,String user,String pwd) {
+		boolean result=false;
+		try {
+			cta=DriverManager.getConnection(
+			"jdbc:mysql://localhost:3306/"+	dbn,user,pwd);
+		Class.forName("com.mysql.jdbc.Driver");	
+		Statement st=cta.createStatement();
+		String query="create table address(HouseNumber varchar(30) primary key, postofc varchar(10), district varchar(10), state varchar(10), pin int, mobilenumber varchar(13),sid int, foreign key(sid) references student(id))";
+		 result=st.execute(query);
+		
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		if(result==true) {
+		return true;
+		}
+		else { 
+			return false;
+		}
+	}
+	public int insertAddress(Address s) {
+		return 1;
+	}
+	public int updateAddress(String hn, Address s) {
+		return 1;
+	}
+	public int deleteAddress(String hn) {
+		return 1;
+	}
+	public List<Address> fetchAllAddresses(){
+		return null;
+	}
+	public Address fetchAAddress(String hn) {
+		return null;
+	}
+}
+
+
+public class TESTONETOMANY {
+	public static void main(String[] args) {
+      StudentDAOImpl ob=StudentDAOImpl.createObject();
+      boolean res=ob.create("6cse5", "root", "sunil");
+      System.out.println("Table student created Sucessfully");
+      AddressDAOImpl obb=AddressDAOImpl.createObject();
+       res=obb.create("8cse", "root", "root");
+      System.out.println("Table address created Sucessfully");
+      
+	}
+
+}
+
+
+
+
