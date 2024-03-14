@@ -1,0 +1,155 @@
+//Map Demonstration
+import java.util.*;
+public class Test6 {
+	public static void main(String[] args) {
+       //creating simple map
+	Map<String, Double> cgpaold= new HashMap<String,Double>();
+	Map<String, Double> cgpatable= new LinkedHashMap<String,Double>();
+	//adding entries
+	cgpaold.put("toushif", 9.4);
+	cgpaold.put("asmita", 8.6);
+	cgpaold.put("dileep", 8.6);
+	cgpaold.put("upendra", 8.3);
+	cgpaold.put("laxmi", 9.4);
+	cgpaold.put("chandana", 8.6);
+	cgpatable.put("rohan", 7.8);
+	cgpatable.putAll(cgpaold);
+    //displaying all entries
+	System.out.println("Displaying old table");
+	for(Map.Entry<String,Double> e:cgpaold.entrySet()) {
+		System.out.println(e.getKey()+"->"+e.getValue());
+	}
+	System.out.println("Displaying new table");
+	for(Map.Entry<String,Double> e:cgpatable.entrySet()) {
+		System.out.println(e.getKey()+"->"+e.getValue());
+	}
+	//Displaying all keys
+	Set<String> keys=cgpatable.keySet();
+	System.out.println("All keys are "+keys);
+	//Displaying values
+	Collection<Double> values=cgpatable.values();
+	System.out.println("All values are "+values);
+    //Displaying value for a given key
+	System.out.println("Value for key toushif is "+
+        cgpatable.get("toushif"));
+	//Displying value for key which is not present
+	System.out.println("Value for key aakash is "+
+	        cgpatable.getOrDefault("aakash",0.0));
+	
+	}
+
+}
+
+
+
+
+--------------------------------------------------------------------------
+
+//Map Demonstration
+// create a map of studentid as key and list of subjects
+//are values
+import java.util.*;
+import java.util.stream.Collectors;
+//pojo custom class
+class Subject {
+	private int subjectCode;
+	private String subjectName;
+	private double credit;
+	public int getSubjectCode() {
+		return subjectCode;
+	}
+	public void setSubjectCode(int subjectCode) {
+		this.subjectCode = subjectCode;
+	}
+	public String getSubjectName() {
+		return subjectName;
+	}
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+	public double getCredit() {
+		return credit;
+	}
+	public void setCredit(double credit) {
+		this.credit = credit;
+	}
+	public Subject(int subjectCode, String subjectName, double credit) {
+		super();
+		this.subjectCode = subjectCode;
+		this.subjectName = subjectName;
+		this.credit = credit;
+	}
+	public Subject() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Subject [subjectCode=" + subjectCode + ", subjectName=" + subjectName + ", credit=" + credit + "]";
+	}
+	
+}
+public class Test6 {
+	public static void main(String[] args) {
+       //creating custom map
+	Map<String, List<Subject>> coursetable= 
+			new LinkedHashMap<String,List<Subject>>();
+	//adding entries
+	List<Subject> list4=new ArrayList<Subject>();
+	list4.add(new Subject(3146,"Advanced Java",3));
+	list4.add(new Subject(3001,"OOP using C++",3));
+	list4.add(new Subject(1004,"Operating System",4));
+	list4.add(new Subject(1005,"Computer Network",3));
+	list4.add(new Subject(1006,"COA",3));
+	list4.add(new Subject(1007,"DAA",3));
+	list4.add(new Subject(1008,"PPS",0));
+	list4.add(new Subject(1009,"MPMC",4));
+	list4.add(new Subject(1010,"C #",3));
+	List<Subject> list6=new ArrayList<Subject>();
+	list6.add(new Subject(3151,"Java FullStack",3));
+	list6.add(new Subject(3152,"Frontend Fullstack",3));
+	list6.add(new Subject(2015,"DAV",4));
+	list6.add(new Subject(2016,"Compiler Design",3));
+	list6.add(new Subject(2013,"Cloud Computing",3));
+	list6.add(new Subject(1009,"Python Training",0));
+	list6.add(new Subject(1008,"PPS",0));
+	list6.add(new Subject(1009,"NLP",4));
+	List<Subject> list2=new ArrayList<Subject>();
+	list2.add(new Subject(1000,"DataStructure",3));
+	list2.add(new Subject(301,"DBMS",3));
+	list2.add(new Subject(1001,"TOC",4));
+	list2.add(new Subject(1005,"English",3));
+	list2.add(new Subject(1006,"ECE",3));
+	list2.add(new Subject(1007,"OE1",3));
+	list2.add(new Subject(1008,"DD",0));
+	list2.add(new Subject(1009,"PPS",4));
+	
+	coursetable.put("20211CSE568", list6);
+	coursetable.put("20211CSE564", list6);
+	coursetable.put("20211CSE564", list6);
+	coursetable.put("20211CSE564", list6);
+	coursetable.put("20231CSE077", list2);
+	coursetable.put("20231CSE078", list2);
+	coursetable.put("20231CSE079", list2);
+	coursetable.put("20231CSE067", list2);
+	coursetable.put("20221CSE999", list4);
+	coursetable.put("20221CSE888", list4);
+	coursetable.put("20221CSE777", list4);
+	coursetable.put("20221CSE666", list4);
+	    //displaying all entries
+	System.out.println("Displaying course table");
+	for(Map.Entry<String,List<Subject>> e:coursetable.entrySet()) {
+		System.out.println(e.getKey()+"->"+e.getValue());
+	}
+	//find all courses with 3 credit
+	for(Map.Entry<String,List<Subject>> e: coursetable.entrySet()) {
+		List<Subject> subjects=e.getValue();
+		for(Subject subject:subjects) {
+			if(subject.getCredit()==3)
+				System.out.println(subject);
+		}
+	}
+}
+}
+
+
+
