@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
 import java.util.Objects;
-
+import java.util.Scanner;
 import java.sql.*;
 
 /*there are students from section 6cse5 , each students have
@@ -158,14 +158,13 @@ class StudentDAOImpl implements StudentDAO {
 	}
 	private StudentDAOImpl() {}
 	public boolean create(String dbn,String user,String pwd) {
-		boolean result=false;
+		boolean result=true;
 		try {
 			cts=DriverManager.getConnection(
 			"jdbc:mysql://localhost:3306/"+	dbn,user,pwd);
 		Class.forName("com.mysql.jdbc.Driver");	
 		Statement st=cts.createStatement();
-		 result=st.execute(
-			"create table student(id int primary key, name varchar(30), cgpa double)");
+		// result=st.execute("create table student(id int primary key, name varchar(30), cgpa double)");
 		
 		}catch(Exception e) {
 			System.out.println(e);
@@ -250,8 +249,61 @@ class AddressDAOImpl implements AddressDAO {
 
 
 public class TESTONETOMANY {
+	
+	public static int insertStudent(Student s) {
+	
+		return 1;
+	}
+	public static int updateStudent(int id,Student s) {
+		return 1;
+	}
+	public static int deleteStudent(int id) {
+		return 1;
+	}
+	public static List<Student> fetchAllStudent() {
+		return null;
+	}
+	
+	
 	public static void main(String[] args) {
       StudentDAOImpl ob=StudentDAOImpl.createObject();
+      char repeat='y';
+      int ch=0;
+      Scanner sc=new Scanner(System.in);
+      do {
+    	  System.out.println("Student CRUD.........");
+    	  System.out.println("Enter choice 1 for insert ");
+    	  System.out.println("Enter  2 for update");
+    	  System.out.println("Enter 3 for delete");
+    	  System.out.println("Enter choice 4 for fetch");
+    	  ch=sc.nextInt();
+    	  switch(ch) {
+    	  case 1:
+    		  Student s=new Student();
+    		  s.setId(566);s.setName("Rakshith");
+    		  s.setCgpa(7.7);
+    		int res= insertStudent(s);
+    		System.out.println(res+" student inserted");
+    		 break;
+    	  case 2:
+    		  Student s=new Student();
+    		  s.setId(566);s.setName("Rakshith");
+    		  s.setCgpa(8.3);
+    		int res= updateStudent(566,s);
+    		System.out.println(res+" student updated");
+    		 break;
+    	  case 3:
+    		 int res=deleteStudent(566);
+    		 System.out.println(res+" student deleted");
+    		 break;
+    	  case 4:
+    		  List<Student> list=fetchAllStudent();
+    		System.out.println(list);
+    		break;
+    		 
+    	  }
+    	  
+      }while(repeat!='n');
       boolean res=ob.create("6cse5", "root", "sunil");
       System.out.println("Table student created Sucessfully");
       AddressDAOImpl obb=AddressDAOImpl.createObject();
