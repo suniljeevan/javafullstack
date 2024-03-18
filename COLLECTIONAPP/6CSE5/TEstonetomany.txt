@@ -2,6 +2,7 @@ package JDBC;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -177,17 +178,53 @@ class StudentDAOImpl implements StudentDAO {
 		}
 	}
 	public int insertStudent(Student s) {
-		return 1;
+		int response=0;
+		try {
+			String sql="insert into student values(?,?,?)";
+			PreparedStatement p=cts.prepareStatement(sql);
+			p.setInt(1, s.getId());
+			p.setString(2, s.getName());
+			p.setDouble(3, s.getCgpa());
+			response=p.executeUpdate();
+		}catch(Exception e) {}
+		return response;
 	}
 	public int updateStudent(int id, Student s) {
-		return 1;
+		int response=0;
+		try {
+			String sql="update student set cgpa=? where id=?";
+			PreparedStatement p=cts.prepareStatement(sql);
+			p.setInt(2, s.getId());
+			response=p.executeUpdate();
+		}catch(Exception e) {}
+		return response;
 		
 	}
 	public int deleteStudent(int id) {
-		return 1;
+		int response=0;
+		try {
+			String sql="delete from student where id=?";
+			PreparedStatement p=cts.prepareStatement(sql);
+			p.setInt(1, s.getId());
+			response=p.executeUpdate();
+		}catch(Exception e) {}
+		return response;
 	}
 	public List<Student> fetchAllStudents(){
-		return null;
+		List<Student> response=new ArrayList<Student>();
+		try {
+			String sql="select * from student";
+			PreparedStatement p=cts.prepareStatement(sql);
+			ResultSet r=p.executeQuery();
+			Student s=new Student();
+			while(r.next()) {
+				s.setId(r.getInt(1));
+				s.setName(r.getString(2));
+				s.setCgpa(r.getDouble(3));
+				response.add(s);
+			}
+		}catch(Exception e) {}
+		return response;
 	}
 	public Student fetchAStudent(int id) {
 		return null;
@@ -249,24 +286,27 @@ class AddressDAOImpl implements AddressDAO {
 
 
 public class TESTONETOMANY {
-	
+	static StudentDAOImpl ob=StudentDAOImpl.createObject();
 	public static int insertStudent(Student s) {
-	
-		return 1;
+	    return( ob.insertStudent(s)); 
+		
 	}
 	public static int updateStudent(int id,Student s) {
-		return 1;
+		return (ob.updateStudent(id, s));
+		
 	}
 	public static int deleteStudent(int id) {
-		return 1;
+		return(ob.deleteStudent(id));
+		
 	}
 	public static List<Student> fetchAllStudent() {
-		return null;
+		
+		return (ob.fetchAllStudents());
 	}
 	
 	
 	public static void main(String[] args) {
-      StudentDAOImpl ob=StudentDAOImpl.createObject();
+      
       char repeat='y';
       int ch=0;
       Scanner sc=new Scanner(System.in);
@@ -286,14 +326,14 @@ public class TESTONETOMANY {
     		System.out.println(res+" student inserted");
     		 break;
     	  case 2:
-    		  Student s=new Student();
+    		  s=new Student();
     		  s.setId(566);s.setName("Rakshith");
     		  s.setCgpa(8.3);
-    		int res= updateStudent(566,s);
+    		res= updateStudent(566,s);
     		System.out.println(res+" student updated");
     		 break;
     	  case 3:
-    		 int res=deleteStudent(566);
+    		  res=deleteStudent(566);
     		 System.out.println(res+" student deleted");
     		 break;
     	  case 4:
@@ -306,9 +346,9 @@ public class TESTONETOMANY {
       }while(repeat!='n');
       boolean res=ob.create("6cse5", "root", "sunil");
       System.out.println("Table student created Sucessfully");
-      AddressDAOImpl obb=AddressDAOImpl.createObject();
-       res=obb.create("6cse5", "root", "sunil");
-      System.out.println("Table address created Sucessfully");
+     // AddressDAOImpl obb=AddressDAOImpl.createObject();
+      // res=obb.create("6cse5", "root", "sunil");
+      //System.out.println("Table address created Sucessfully");
       
 	}
 
