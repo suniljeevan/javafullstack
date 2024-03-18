@@ -49,6 +49,22 @@ public Student() {
 public String toString() {
 	return "Student [id=" + id + ", name=" + name + ", cgpa=" + cgpa + "]";
 }
+@Override
+public int hashCode() {
+	return Objects.hash(cgpa, id, name);
+}
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	Student other = (Student) obj;
+	return Double.doubleToLongBits(cgpa) == Double.doubleToLongBits(other.cgpa) && id == other.id
+			&& Objects.equals(name, other.name);
+}
 
 }
 class Address {
@@ -186,7 +202,9 @@ class StudentDAOImpl implements StudentDAO {
 			p.setString(2, s.getName());
 			p.setDouble(3, s.getCgpa());
 			response=p.executeUpdate();
-		}catch(Exception e) {}
+		}catch(Exception e) {
+			System.out.println(e);
+		}
 		return response;
 	}
 	public int updateStudent(int id, Student s) {
@@ -194,9 +212,12 @@ class StudentDAOImpl implements StudentDAO {
 		try {
 			String sql="update student set cgpa=? where id=?";
 			PreparedStatement p=cts.prepareStatement(sql);
+			p.setDouble(1, s.getCgpa());
 			p.setInt(2, s.getId());
 			response=p.executeUpdate();
-		}catch(Exception e) {}
+		}catch(Exception e) {
+			System.out.println(e);
+		}
 		return response;
 		
 	}
@@ -205,9 +226,11 @@ class StudentDAOImpl implements StudentDAO {
 		try {
 			String sql="delete from student where id=?";
 			PreparedStatement p=cts.prepareStatement(sql);
-			p.setInt(1, s.getId());
+			p.setInt(1, id);
 			response=p.executeUpdate();
-		}catch(Exception e) {}
+		}catch(Exception e) {
+			System.out.println(e);
+		}
 		return response;
 	}
 	public List<Student> fetchAllStudents(){
@@ -216,14 +239,18 @@ class StudentDAOImpl implements StudentDAO {
 			String sql="select * from student";
 			PreparedStatement p=cts.prepareStatement(sql);
 			ResultSet r=p.executeQuery();
-			Student s=new Student();
+			Student s;
 			while(r.next()) {
+				s=new Student();
 				s.setId(r.getInt(1));
 				s.setName(r.getString(2));
 				s.setCgpa(r.getDouble(3));
+				System.out.println(s.getId());
 				response.add(s);
 			}
-		}catch(Exception e) {}
+		}catch(Exception e) {
+			System.out.println(e);
+		}
 		return response;
 	}
 	public Student fetchAStudent(int id) {
@@ -306,7 +333,7 @@ public class TESTONETOMANY {
 	
 	
 	public static void main(String[] args) {
-      
+	ob.create("6cse5", "root", "sunil");
       char repeat='y';
       int ch=0;
       Scanner sc=new Scanner(System.in);
@@ -320,20 +347,35 @@ public class TESTONETOMANY {
     	  switch(ch) {
     	  case 1:
     		  Student s=new Student();
-    		  s.setId(566);s.setName("Rakshith");
-    		  s.setCgpa(7.7);
+    		  s=new Student();
+    		  System.out.println("Enter Id");
+    		  int id=sc.nextInt();
+    		  System.out.println("Enter Name");
+    		  String n=sc.next();
+    		  System.out.println("Enter cgpa");
+    		  double c=sc.nextDouble();
+    		  s.setId(id);s.setName(n);
+    		  s.setCgpa(c);
     		int res= insertStudent(s);
     		System.out.println(res+" student inserted");
     		 break;
     	  case 2:
     		  s=new Student();
-    		  s.setId(566);s.setName("Rakshith");
-    		  s.setCgpa(8.3);
+    		  System.out.println("Enter Id");
+    		   id=sc.nextInt();
+    		  System.out.println("Enter Name");
+    		   n=sc.next();
+    		  System.out.println("Enter cgpa");
+    		   c=sc.nextDouble();
+    		  s.setId(id);s.setName(n);
+    		  s.setCgpa(c);
     		res= updateStudent(566,s);
     		System.out.println(res+" student updated");
     		 break;
     	  case 3:
-    		  res=deleteStudent(566);
+    		  System.out.println("enter id");
+    		  id=sc.nextInt();
+    		  res=deleteStudent(id);
     		 System.out.println(res+" student deleted");
     		 break;
     	  case 4:
@@ -344,7 +386,7 @@ public class TESTONETOMANY {
     	  }
     	  
       }while(repeat!='n');
-      boolean res=ob.create("6cse5", "root", "sunil");
+      
       System.out.println("Table student created Sucessfully");
      // AddressDAOImpl obb=AddressDAOImpl.createObject();
       // res=obb.create("6cse5", "root", "sunil");
