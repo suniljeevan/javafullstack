@@ -1,5 +1,6 @@
 package JDBC;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 // PERFORM DATABASE OPERATION FOR STUDENT (ENTITY/POJO)
@@ -81,7 +82,7 @@ class Student {
 		}
 		public void create() {
 			try {
-		String query="create table student(regdno varchar(11),name varchar(30), cgpa double, semester int)";
+		String query="create table student(regdno varchar(12),name varchar(30), cgpa double, semester int)";
 		PreparedStatement p=con.prepareStatement(query);
 		p.execute();
 		System.out.println("Table created");
@@ -124,7 +125,23 @@ class Student {
 						}catch(Exception e) {}
 		}
 		public List<Student> fetchAllStudents(){
-			return null;
+			List<Student> students=new ArrayList<Student>();
+			try {
+				String query="select * from student";
+				PreparedStatement p=con.prepareStatement(query);
+				ResultSet response=p.executeQuery();
+				System.out.println("Studets fetched are.....");
+				Student s;
+				while(response.next()) {
+					s=new Student();
+					s.setId(response.getString(1));
+					s.setName(response.getString(2));
+					s.setCgpa(response.getDouble(3));
+					s.setSem(response.getInt(4));
+					students.add(s);
+				}
+			}catch(Exception e) {}
+			return students;
 		}
 	}
 
@@ -137,6 +154,8 @@ public class STUDENTSERVICE {
          ob.insertStudent(s);
          s.setCgpa(8.7);
          ob.updateStudent("20211cse0001", s);
+         List<Student> received=ob.fetchAllStudents();
+         System.out.println(received);
         // ob.deleteStudent("20211cse0001");
 	}
 
