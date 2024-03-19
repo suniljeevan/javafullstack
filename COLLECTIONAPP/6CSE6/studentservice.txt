@@ -1,0 +1,60 @@
+package JDBC;
+// PERFORM DATABASE OPERATION FOR STUDENT (ENTITY/POJO)
+//STEP 0 CREATE STUDENT ENTITY
+class Student {
+	private String Id;
+	private String name;
+	private double cgpa;
+	private int sem;
+	//generate getter setter
+	public String getId() {
+		return Id;
+	}
+	public void setId(String id) {
+		Id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getCgpa() {
+		return cgpa;
+	}
+	public void setCgpa(double cgpa) {
+		this.cgpa = cgpa;
+	}
+	public int getSem() {
+		return sem;
+	}
+	public void setSem(int sem) {
+		this.sem = sem;
+	}
+	//generate constructors
+	public Student(String id, String name, double cgpa, int sem) {
+		super();
+		Id = id;
+		this.name = name;
+		this.cgpa = cgpa;
+		this.sem = sem;
+	}
+	public Student() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Student [Id=" + Id + ", name=" + name + ", cgpa=" + cgpa + ", sem=" + sem + "]";
+	}
+	//step 1 - create interface for repository
+	interface StudentDAO {
+		public void createConnection(String dbn,String u,String p);
+	}
+}
+
+public class STUDENTSERVICE {
+	public static void main(String[] args) {
+
+	}
+
+}
