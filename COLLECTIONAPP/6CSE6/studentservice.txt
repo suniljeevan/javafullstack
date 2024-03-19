@@ -97,7 +97,9 @@ class Student {
 		p.setInt(4, s.getSem());
 				p.executeUpdate();
 				System.out.println("Record Inserted");
-			}catch(Exception e) {}
+			}catch(Exception e) {
+				System.out.println(e);
+			}
 			
 		}
 		public void updateStudent(String id, Student s) {
@@ -127,8 +129,15 @@ class Student {
 	}
 
 public class STUDENTSERVICE {
+	static StudentDAOImpl ob=StudentDAOImpl.createInstance();
 	public static void main(String[] args) {
-
+         ob.createConnection("6cse6", "root", "sunil");
+         ob.create();
+         Student s=new Student("20211cse0001","Asmita",9.1,6);
+         ob.insertStudent(s);
+         s.setCgpa(8.7);
+         ob.updateStudent("20211cse0001", s);
+        // ob.deleteStudent("20211cse0001");
 	}
 
 }
