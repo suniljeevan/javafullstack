@@ -1,4 +1,7 @@
 package JDBC;
+
+import java.util.List;
+import java.sql.*;
 // PERFORM DATABASE OPERATION FOR STUDENT (ENTITY/POJO)
 //STEP 0 CREATE STUDENT ENTITY
 class Student {
@@ -46,11 +49,82 @@ class Student {
 	public String toString() {
 		return "Student [Id=" + Id + ", name=" + name + ", cgpa=" + cgpa + ", sem=" + sem + "]";
 	}
+}
 	//step 1 - create interface for repository
 	interface StudentDAO {
 		public void createConnection(String dbn,String u,String p);
+		public void create();
+		public void insertStudent(Student s);
+		public void updateStudent(String id, Student s);
+		public void deleteStudent(String id);
+		public List<Student> fetchAllStudents();
 	}
-}
+//step 2 - implement the above 
+	 class StudentDAOImpl implements StudentDAO {
+		public static StudentDAOImpl ob=null;
+		public Connection con=null;
+		public static StudentDAOImpl createInstance() {
+			if(ob==null)
+				ob=new StudentDAOImpl();
+			return ob;
+		}
+		private StudentDAOImpl() {}
+		public void createConnection(String dbn,String u,String p) {
+			try {
+		String address="jdbc:mysql://localhost:3306/";		
+		con=DriverManager.getConnection(address+dbn,u,p);	
+		Class.forName("com.mysql.jdbc.Driver");
+		
+			}catch(Exception e) {
+				System.out.println(e);
+			}
+		}
+		public void create() {
+			try {
+		String query="create table student(regdno varchar(11),name varchar(30), cgpa double, semester int)";
+		PreparedStatement p=con.prepareStatement(query);
+		p.execute();
+		System.out.println("Table created");
+		}catch(Exception e) {}
+		}
+		public void insertStudent(Student s) {
+			try {
+		String query="insert into student values(?,?,?,?)";
+		PreparedStatement p=con.prepareStatement(query);
+		p.setString(1, s.getId());
+		p.setString(2, s.getName());
+		p.setDouble(3, s.getCgpa());
+		p.setInt(4, s.getSem());
+				p.executeUpdate();
+				System.out.println("Record Inserted");
+			}catch(Exception e) {}
+			
+		}
+		public void updateStudent(String id, Student s) {
+			try {
+			String query="update student set name=?, cgpa=?, semester=? where regdno=?";
+			PreparedStatement p=con.prepareStatement(query);
+			p.setString(4, s.getId());
+			p.setString(1, s.getName());
+			p.setDouble(2, s.getCgpa());
+			p.setInt(3, s.getSem());
+			p.executeUpdate();
+			System.out.println("Record Updated");
+					}catch(Exception e) {}
+		}
+		public void deleteStudent(String id) {
+			try {
+			String query="delete from student where regdno=?";
+			PreparedStatement p=con.prepareStatement(query);
+			p.setString(1, id);
+			p.executeUpdate();
+			System.out.println("Record Deleted");
+						}catch(Exception e) {}
+		}
+		public List<Student> fetchAllStudents(){
+			return null;
+		}
+	}
 
 public class STUDENTSERVICE {
 	public static void main(String[] args) {
