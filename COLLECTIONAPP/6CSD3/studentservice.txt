@@ -53,8 +53,7 @@ class Student {
 }
 	//step 1 - create interface for repository
 	interface StudentDAO {
-		public void createConnection();
-		public void create();
+		public void createTable();
 		public void insertStudent(Student s);
 		public void updateStudent(String id, Student s);
 		public void deleteStudent(String id);
@@ -80,7 +79,7 @@ class Student {
 				System.out.println(e);
 			}
 		}
-		public void create() {
+		public void createTable() {
 			try {
 		String query="create table student(regdno varchar(12),name varchar(30), cgpa double, semester int)";
 		PreparedStatement p=con.prepareStatement(query);
