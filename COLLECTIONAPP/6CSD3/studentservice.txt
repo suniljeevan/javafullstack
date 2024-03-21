@@ -1,0 +1,162 @@
+package JDBC;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.*;
+// PERFORM DATABASE OPERATION FOR STUDENT (ENTITY/POJO)
+//STEP 0 CREATE STUDENT ENTITY
+class Student {
+	private String Id;
+	private String name;
+	private double cgpa;
+	private int sem;
+	//generate getter setter
+	public String getId() {
+		return Id;
+	}
+	public void setId(String id) {
+		Id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getCgpa() {
+		return cgpa;
+	}
+	public void setCgpa(double cgpa) {
+		this.cgpa = cgpa;
+	}
+	public int getSem() {
+		return sem;
+	}
+	public void setSem(int sem) {
+		this.sem = sem;
+	}
+	//generate constructors
+	public Student(String id, String name, double cgpa, int sem) {
+		super();
+		Id = id;
+		this.name = name;
+		this.cgpa = cgpa;
+		this.sem = sem;
+	}
+	public Student() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Student [Id=" + Id + ", name=" + name + ", cgpa=" + cgpa + ", sem=" + sem + "]";
+	}
+}
+	//step 1 - create interface for repository
+	interface StudentDAO {
+		public void createConnection();
+		public void create();
+		public void insertStudent(Student s);
+		public void updateStudent(String id, Student s);
+		public void deleteStudent(String id);
+		public List<Student> fetchAllStudents();
+	}
+//step 2 - implement the above 
+	 class StudentDAOImpl implements StudentDAO {
+		public static StudentDAOImpl ob=null;
+		public Connection con=null;
+		public static StudentDAOImpl createObject() {
+			if(ob==null)
+				ob=new StudentDAOImpl();
+			return ob;
+		}
+		private StudentDAOImpl() {}
+		public void createConnection() {
+			try {
+		String address="jdbc:mysql://localhost:3306/6csd3";		
+		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/6csd3","root","root");	
+		Class.forName("com.mysql.jdbc.Driver");
+		
+			}catch(Exception e) {
+				System.out.println(e);
+			}
+		}
+		public void create() {
+			try {
+		String query="create table student(regdno varchar(12),name varchar(30), cgpa double, semester int)";
+		PreparedStatement p=con.prepareStatement(query);
+		p.execute();
+		System.out.println("Table created");
+		}catch(Exception e) {}
+		}
+		public void insertStudent(Student s) {
+			try {
+		String query="insert into student values(?,?,?,?)";
+		PreparedStatement p=con.prepareStatement(query);
+		p.setString(1, s.getId());
+		p.setString(2, s.getName());
+		p.setDouble(3, s.getCgpa());
+		p.setInt(4, s.getSem());
+				p.executeUpdate();
+				System.out.println("Record Inserted");
+			}catch(Exception e) {
+				System.out.println(e);
+			}
+			
+		}
+		public void updateStudent(String id, Student s) {
+			try {
+			String query="update student set name=?, cgpa=?, semester=? where regdno=?";
+			PreparedStatement p=con.prepareStatement(query);
+			p.setString(4, s.getId());
+			p.setString(1, s.getName());
+			p.setDouble(2, s.getCgpa());
+			p.setInt(3, s.getSem());
+			p.executeUpdate();
+			System.out.println("Record Updated");
+					}catch(Exception e) {}
+		}
+		public void deleteStudent(String id) {
+			try {
+			String query="delete from student where regdno=?";
+			PreparedStatement p=con.prepareStatement(query);
+			p.setString(1, id);
+			p.executeUpdate();
+			System.out.println("Record Deleted");
+						}catch(Exception e) {}
+		}
+		public List<Student> fetchAllStudents(){
+			List<Student> students=new ArrayList<Student>();
+			try {
+				String query="select * from student";
+				PreparedStatement p=con.prepareStatement(query);
+				ResultSet response=p.executeQuery();
+				System.out.println("Studets fetched are.....");
+				Student s;
+				while(response.next()) {
+					s=new Student();
+					s.setId(response.getString(1));
+					s.setName(response.getString(2));
+					s.setCgpa(response.getDouble(3));
+					s.setSem(response.getInt(4));
+					students.add(s);
+				}
+			}catch(Exception e) {}
+			return students;
+		}
+	}
+
+public class STUDENTSERVICE {
+	static StudentDAOImpl ob=StudentDAOImpl.createObject();
+	public static void main(String[] args) {
+         ob.createConnection();
+         ob.create();
+         Student s=new Student("20211cse0001","Asmita",9.1,6);
+         ob.insertStudent(s);
+         s.setCgpa(8.7);
+         ob.updateStudent("20211cse0001", s);
+         List<Student> received=ob.fetchAllStudents();
+         System.out.println(received);
+        // ob.deleteStudent("20211cse0001");
+	}
+
+}
