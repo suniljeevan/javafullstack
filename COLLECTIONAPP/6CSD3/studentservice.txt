@@ -1,4 +1,4 @@
-package JDBC;
+package JDBCPKG;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,8 +71,7 @@ class Student {
 		private StudentDAOImpl() {}
 		public void createConnection() {
 			try {
-		String address="jdbc:mysql://localhost:3306/6csd3";		
-		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/6csd3","root","root");	
+		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/6csd3","root","sunil");	
 		Class.forName("com.mysql.jdbc.Driver");
 		
 			}catch(Exception e) {
@@ -148,7 +147,7 @@ public class STUDENTSERVICE {
 	static StudentDAOImpl ob=StudentDAOImpl.createObject();
 	public static void main(String[] args) {
          ob.createConnection();
-         ob.create();
+         ob.createTable();
          Student s=new Student("20211cse0001","Asmita",9.1,6);
          ob.insertStudent(s);
          s.setCgpa(8.7);
