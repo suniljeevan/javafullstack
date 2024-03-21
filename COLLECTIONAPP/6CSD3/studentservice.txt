@@ -3,7 +3,7 @@ package JDBCPKG;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
-// PERFORM DATABASE OPERATION FOR STUDENT (ENTITY/POJO)
+// create student entity and map it to database table
 //STEP 0 CREATE STUDENT ENTITY
 class Student {
 	private String Id;
