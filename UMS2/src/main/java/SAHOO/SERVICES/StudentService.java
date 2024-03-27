@@ -3,18 +3,29 @@ package SAHOO.SERVICES;
 import java.util.List;
 
 import SAHOO.ENTITIES.Student;
+import SAHOO.REPOSITORIES.StudentDAO;
 
 public class StudentService {
-   public int insertStudent(Student s) {
-	   return 1;
+	//@Autowired  later
+	//Explicit wiring StudentRepository with StudentService
+	private StudentDAO studentdao;
+   public StudentService(StudentDAO studentdao) {
+		this.studentdao = studentdao;
+	}
+public int insertStudent(Student s) {
+	 int res = studentdao.insertStudent(s);
+	   return res;
    }
    public int updateStudent(int id, Student s) {
-	   return 1;
+	 int res = studentdao.updateStudent(id, s);
+	   return res;
    }
    public int deleteStudent(int id) {
-	   return 1;
+	   int res = studentdao.deleteStudent(id);
+	   return res;
    }
    public List<Student> fetchAllStudents() {
-	   return null;
+	  List<Student> list=studentdao.fetchAllStudent();
+	   return list;
    }
 }
