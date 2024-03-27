@@ -14,14 +14,8 @@ public class StudentService {
 	}
 public int insertStudent(Student s) {
 	int res=0;
-	try {
-	  studentdao.createConnection();
-	
 	  res = studentdao.insertStudent(s);
 	  System.out.println(res);
-	}catch(Exception e) {
-		System.out.println(e);
-	}
 	   return res;
    }
    public int updateStudent(int id, Student s) {

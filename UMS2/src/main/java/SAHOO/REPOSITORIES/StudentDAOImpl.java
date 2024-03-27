@@ -32,19 +32,10 @@ public class StudentDAOImpl implements StudentDAO {
 		try {
 		PreparedStatement ps=contodb.prepareStatement("insert into student values(?,?,?)");
 		//before doing this insert subject in subject table
-		PreparedStatement ps2=contodb.prepareStatement("insert into enrollment values(?,?)");
 		ps.setInt(1, s.getId());
 		ps.setString(2, s.getName());
 		ps.setString(3, s.getAddress());
 		response=ps.executeUpdate();
-		//ps2.setInt(1, s.getId());
-		/*Set<Subject> subjects=s.getSubjects();
-		//System.out.println(subjects);
-	    for(Subject sub:subjects) {
-	    	ps2.setString(2, sub.getSubjectCode());
-	    	response2=ps2.executeUpdate();
-	    	if(response2!=1)break;
-	    }*/
 		}catch(Exception e) {
 			System.out.println(e);
 		}

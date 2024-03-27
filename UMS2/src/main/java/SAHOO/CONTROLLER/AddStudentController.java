@@ -31,7 +31,7 @@ public class AddStudentController extends HttpServlet {
 		String name=request.getParameter("n");
 		String address = request.getParameter("a");
 		ob.setId(id);ob.setName(name);ob.setAddress(address);
-		//studentdao.createConnection();
+		studentdao.createConnection();
 		response.setContentType("text/html");
 		response.getWriter().print("Connection Established");
 		int r=studentservice.insertStudent(ob);
