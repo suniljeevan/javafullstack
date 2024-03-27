@@ -13,7 +13,15 @@ public class StudentService {
 		this.studentdao = studentdao;
 	}
 public int insertStudent(Student s) {
-	 int res = studentdao.insertStudent(s);
+	int res=0;
+	try {
+	  studentdao.createConnection();
+	
+	  res = studentdao.insertStudent(s);
+	  System.out.println(res);
+	}catch(Exception e) {
+		System.out.println(e);
+	}
 	   return res;
    }
    public int updateStudent(int id, Student s) {

@@ -19,9 +19,9 @@ public class StudentDAOImpl implements StudentDAO {
 		return ob;
 	}
 	public boolean createConnection()throws Exception {
-		contodb=DriverManager.getConnection(
-	       "jdbc:mysql://localhost:3306/8CSE","root","sunil");
 		Class.forName("com.mysql.jdbc.Driver");
+		contodb=DriverManager.getConnection("jdbc:mysql://localhost:3306/8CSE","root","sunil");
+		
 		if(contodb!=null)
 			return true;
 		else
@@ -30,27 +30,25 @@ public class StudentDAOImpl implements StudentDAO {
 	public int insertStudent(Student s) {
 		int response=0,response2=0;
 		try {
-		PreparedStatement ps=contodb.prepareStatement(
-				"insert into student values(?,?,?)");
+		PreparedStatement ps=contodb.prepareStatement("insert into student values(?,?,?)");
 		//before doing this insert subject in subject table
-		PreparedStatement ps2=contodb.prepareStatement(
-				"insert into enrollment values(?,?)");
+		PreparedStatement ps2=contodb.prepareStatement("insert into enrollment values(?,?)");
 		ps.setInt(1, s.getId());
 		ps.setString(2, s.getName());
 		ps.setString(3, s.getAddress());
 		response=ps.executeUpdate();
-		ps2.setInt(1, s.getId());
-		Set<Subject> subjects=s.getSubjects();
+		//ps2.setInt(1, s.getId());
+		/*Set<Subject> subjects=s.getSubjects();
 		//System.out.println(subjects);
 	    for(Subject sub:subjects) {
 	    	ps2.setString(2, sub.getSubjectCode());
 	    	response2=ps2.executeUpdate();
 	    	if(response2!=1)break;
-	    }
+	    }*/
 		}catch(Exception e) {
 			System.out.println(e);
 		}
-		if(response==1 && response2==1)
+		if(response==1 )
 		return 1;
 		else return 0;
 	}
