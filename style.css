@@ -1,5 +1,5 @@
 body{
-    background-color: black;
+    background-color: yellow;
     color: white;
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -10,7 +10,29 @@ body{
 a:hover{
     cursor: pointer;
 }
+table{
+    border: 1px solid white;
+    width:100%;
+    border-spacing: 0;
+    min-height: 400px;
+    overflow-x: auto;
+}
 
+tr,th{
+    text-align: center;
+}
+tr{
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+    padding: 10px;
+}
+td{
+    padding: 10px;
+    border-right: 1px solid white;
+}
+tbody{
+    height: auto;
+}
 .container{
     margin: 20px 50px;
 }
@@ -46,29 +68,7 @@ a:hover{
     justify-content: center;
     gap:10px
 }
-.table{
-    border: 1px solid white;
-    width:100%;
-    border-spacing: 0;
-    min-height: 200px;
-    overflow-x: auto;
-}
 
-th,td{
-    text-align: center;
-}
-th{
-    border-bottom: 1px solid white;
-    border-right: 1px solid white;
-    padding: 10px;
-}
-td{
-    padding: 10px;
-    border-right: 1px solid white;
-}
-tbody{
-    height: auto;
-}
 
 .search{
     width:100%;
