@@ -15,11 +15,15 @@ public class SignUpController extends HttpServlet {
 //code for  receiving and validating
 String un=req.getParameter("u");
 String pwd=req.getParameter("p");
+if(pwd.equalsIgnoreCase("123")) {
 HttpSession session = req.getSession();
 session.setAttribute("USERNAME",un);
 session.setAttribute("PASSWORD",pwd);
 res.setContentType("text/html");
 res.getWriter().print("<a href="+"login"+">Click for Login"+"</a>");
+}else {
+	res.getWriter().print("<a href="+"signup.html"+">ReEnter Password "+"</a>");
+}
 		}catch(Exception e) {}
 	}
 }
