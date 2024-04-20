@@ -4,4 +4,17 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
+<servlet>
+<servlet-name>one</servlet-name>
+<servlet-class>Sahoo.Controllers.AddStudentController</servlet-class>
+</servlet>  
+<servlet-mapping>
+<servlet-name>one</servlet-name>
+<url-pattern>/insert</url-pattern>
+</servlet-mapping>
+
+
+
+
+
 </web-app>
