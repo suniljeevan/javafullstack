@@ -13,15 +13,17 @@ public class Test {
 	       student.setRoll(1);
 	       student.setName("god");
 	       student.setMarks(100);
-	    SessionFactory factory = new Configuration().configure().buildSessionFactory();
-	    System.out.println("1");
+            Configuration configuration = new Configuration();
+             //step1
+	    SessionFactory factory = configuration.configure().buildSessionFactory();
+            //step2
 	    Session session = factory.openSession();  
-	    System.out.println("2");
-	   Transaction t = session.beginTransaction(); 
-	    System.out.println("3");
-	       //5.Save your object to database
+            //step 3
+	    Transaction t = session.beginTransaction(); 
+	    
+	       //4.Save your object to database
 	       session.save(student);
-	       //6/ Commit your transaction 
+	       //5 Commit your transaction 
 	       t.commit();
 	       session.close();
 	       factory.close();
