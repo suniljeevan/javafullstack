@@ -12,6 +12,22 @@
 <servlet-name>one</servlet-name>
 <url-pattern>/insert</url-pattern>
 </servlet-mapping>
+<servlet>
+<servlet-name>two</servlet-name>
+<servlet-class>Sahoo.Controllers.UpdateStudentController</servlet-class>
+</servlet>  
+<servlet-mapping>
+<servlet-name>two</servlet-name>
+<url-pattern>/update</url-pattern>
+</servlet-mapping>
+<servlet>
+<servlet-name>three</servlet-name>
+<servlet-class>Sahoo.Controllers.DeleteStudentController</servlet-class>
+</servlet>  
+<servlet-mapping>
+<servlet-name>three</servlet-name>
+<url-pattern>/delete</url-pattern>
+</servlet-mapping>
 
 
 
