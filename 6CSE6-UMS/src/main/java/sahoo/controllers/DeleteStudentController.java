@@ -22,12 +22,14 @@ public class DeleteStudentController extends HttpServlet {
 	    	Connection c=DriverManager.getConnection(
 	    			"jdbc:mysql://localhost:3306/6cse6","root","sunil");
 	    	String rn=request.getParameter("r");
-	    	String sql="delete from student where id=?";
+	    	String sql="delete from student where regdno=?";
 	    	PreparedStatement p=c.prepareStatement(sql);
 	    	p.setString(1, rn);
 	    	p.executeUpdate();
 	    	response.getWriter().println("<h2> record deleted");
-	       }catch(Exception e) {}
+	       }catch(Exception e) {
+	    	   System.out.println(e);
+	       }
 		}
 
 	}
