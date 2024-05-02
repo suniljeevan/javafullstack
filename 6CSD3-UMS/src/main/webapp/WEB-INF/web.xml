@@ -4,4 +4,34 @@
   <welcome-file-list>
     <welcome-file>homepage.html</welcome-file>
    </welcome-file-list>
+ <servlet>
+ <servlet-name>first</servlet-name>
+ <servlet-class>com.pu.controllers.AddStudentController</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ <servlet-name>first</servlet-name>
+ <url-pattern>/insert</url-pattern>
+ </servlet-mapping>  
+ <servlet>
+ <servlet-name>second</servlet-name>
+ <servlet-class>com.pu.controllers.UpdateStudentController</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ <servlet-name>second</servlet-name>
+ <url-pattern>/update</url-pattern>
+ </servlet-mapping>  
+ <servlet>
+ <servlet-name>third</servlet-name>
+ <servlet-class>com.pu.controllers.DeleteStudentController</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ <servlet-name>third</servlet-name>
+ <url-pattern>/delete</url-pattern>
+ </servlet-mapping>  
 </web-app>
+
+
+
+
+
+
