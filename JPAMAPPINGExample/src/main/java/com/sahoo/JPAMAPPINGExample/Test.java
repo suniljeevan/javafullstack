@@ -23,12 +23,12 @@ public class Test {
 		Transaction transaction = session.beginTransaction();
 		System.out.println("transaction");
 		HOD hod = new HOD();
-		hod.setHodid(101);
+		hod.setHodid(103);
 		hod.setHodname("Dr. Blessed");
 		Department department = new Department();
-		department.setDepartmentid(1001);
+		department.setDepartmentid(1003);
         department.setDepartmentname("CSE");
-        //hod.setDepartment(department);
+        hod.setDepartment(department);
         department.setHod(hod);
 		session.save(hod);
 		session.save(department);
