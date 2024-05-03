@@ -15,8 +15,12 @@ public class Test {
 
 	public static void main(String[] args) throws Exception{
 		try {
-			final StandardServiceRegistry registry=new StandardServiceRegistryBuilder().configure().build();
-			SessionFactory factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+	     final StandardServiceRegistry registry=new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+               /*or 
+               Configuration config=new Configuration();
+			SessionFactory factory = config.configure().buildSessionFactory();
+               */
 		System.out.println("factory");
 		Session session=factory.openSession();
 		System.out.println("session");
