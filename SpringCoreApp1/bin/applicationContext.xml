@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  
+    xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+  <bean id="addressbean" class="com.pu.Address">
+   <property name="parentname" value="Dr. Sanjeev"></property>
+   <property name="state" value="punjab"></property>
+   <property name="country" value="india"></property>
+   <property name="pin" value="755012"></property>
+  </bean> 
+  
+  <bean id="studentbean" class="com.pu.Student">
+   <property name="regdno" value="20211cse456"></property>
+   <property name="name" value="kabir"></property>
+   <property name="cgpa" value="8.6"></property>
+   <property name="address" ref="addressbean"></property>
+  </bean>              
+</beans>
