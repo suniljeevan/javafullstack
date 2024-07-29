@@ -1,0 +1,8 @@
+CA2    8marks
+
+6cse6
+
+
+Create a controller for student
+  to access all students (id,name,cgpa)
+  to add a new student
